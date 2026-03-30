@@ -1,0 +1,611 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 32 65% 51%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 32 65% 51%;
+    --radius: 0.5rem;
+    
+    /* Legacy iOS Variables */
+    --ios-bg: #F2F2F7;
+    --ios-card: #FFFFFF;
+    --ios-text: #000000;
+    --ios-text-secondary: #8E8E93;
+    --ios-blue: #D5862F;  /* Matches primary orange */
+    --ios-blue-active: #b56e25;
+    --ios-gray: #C6C6C8;
+    --ios-green: #34C759;
+    --ios-red: #FF3B30;
+    --ios-orange: #D5862F;
+    --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 32 65% 51%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 32 65% 51%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--ios-bg);
+    color: var(--ios-text);
+    font-family: var(--font-family);
+    -webkit-font-smoothing: antialiased;
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+.ios-app {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+}
+
+.ios-navbar {
+    background-color: white;
+    color: var(--ios-text);
+    padding: 0;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-bottom: 3px solid var(--ios-orange);
+}
+
+.navbar-logo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.ios-navbar p {
+    font-size: 14px;
+    color: var(--ios-text-secondary);
+    margin: 0;
+    padding: 8px 16px 12px;
+}
+
+@media (max-width: 600px) {
+    .ios-navbar p {
+        font-size: 12px;
+        padding: 6px 12px 10px;
+    }
+}
+
+.ios-content {
+    padding: 20px;
+}
+
+.section-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: var(--ios-text-secondary);
+    margin: 24px 0 8px 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.section-orange {
+    color: var(--ios-orange);
+}
+
+.ios-form-group {
+    background-color: var(--ios-card);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.ios-input-row {
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    padding: 0 16px;
+    border-bottom: 0.5px solid var(--ios-gray);
+    position: relative;
+    background: transparent;
+}
+
+.ios-input-row:last-child {
+    border-bottom: none;
+}
+
+.ios-input-row.stacked {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 16px;
+}
+
+.ios-input-row label {
+    flex: 1;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--ios-text);
+}
+
+.ios-input-row.stacked label {
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.req {
+    color: var(--ios-red);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"] {
+    flex: 1;
+    border: none;
+    font-size: 17px;
+    text-align: right;
+    color: var(--ios-text-secondary);
+    background: transparent;
+    outline: none;
+    width: 60%;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus {
+    color: var(--ios-text);
+}
+
+input::placeholder {
+    color: #C7C7CC;
+}
+
+textarea {
+    width: 100%;
+    border: none;
+    font-size: 17px;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 80px;
+    color: var(--ios-text);
+    outline: none;
+    background: transparent;
+}
+
+/* Radio and Checkbox Groups */
+.ios-radio-group,
+.ios-checkbox-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.ios-radio-group.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.ios-radio-group.grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+}
+
+.ios-radio-group label,
+.ios-checkbox-group label {
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+.ios-radio-group label input,
+.ios-checkbox-group label input {
+    margin-right: 12px;
+    width: 20px;
+    height: 20px;
+    accent-color: var(--ios-blue);
+}
+
+/* Segmented Control */
+.ios-segmented-control {
+    display: flex;
+    background-color: #E3E3E8;
+    border-radius: 8px;
+    padding: 2px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.ios-segmented-control label {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    margin: 0;
+}
+
+.ios-segmented-control label input {
+    opacity: 0;
+    position: absolute;
+    top: 0; left: 0; width: 0; height: 0;
+}
+
+.ios-segmented-control label span {
+    display: block;
+    padding: 6px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    color: var(--ios-text);
+}
+
+.ios-segmented-control label input:checked + span {
+    background-color: var(--ios-card);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+/* Notices */
+.ios-notice {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 24px;
+    line-height: 1.4;
+}
+
+.ios-notice.success {
+    background-color: #E5F9E6;
+    color: #1B5E20;
+    border: 1px solid #C8E6C9;
+}
+
+.ios-notice.warning {
+    background-color: #FFF3E0;
+    color: #E65100;
+    border: 1px solid #FFE0B2;
+}
+
+/* Footer / Buttons */
+.form-footer {
+    padding: 24px 16px;
+    text-align: center;
+}
+
+.footer-note {
+    font-size: 13px;
+    color: var(--ios-text-secondary);
+    margin-bottom: 24px;
+}
+
+.ios-button {
+    background-color: var(--ios-blue);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 16px 24px;
+    width: 100%;
+    max-width: 400px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+}
+
+.ios-button:hover {
+    background-color: var(--ios-blue-active);
+}
+
+.ios-button:disabled {
+    background-color: #e8b87a;
+    cursor: not-allowed;
+}
+
+.form-message {
+    margin-top: 16px;
+    font-size: 15px;
+    font-weight: 500;
+}
+.form-message.success {
+    color: var(--ios-green);
+}
+.form-message.error {
+    color: var(--ios-red);
+}
+
+@media (max-width: 600px) {
+    .ios-input-row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 16px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"] {
+        text-align: left;
+        width: 100%;
+        margin-top: 8px;
+    }
+    
+    .ios-radio-group.grid-2,
+    .ios-radio-group.grid-3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* iOS Table */
+.ios-table-wrapper {
+    background-color: var(--ios-card);
+    border-radius: 12px;
+    overflow-x: auto;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.ios-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    text-align: left;
+    min-width: 600px;
+}
+
+.ios-table th {
+    background-color: #E3E3E8;
+    color: var(--ios-text);
+    font-weight: 500;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ios-gray);
+    border-right: 1px solid var(--ios-gray);
+    text-align: center;
+}
+
+.ios-table th:last-child, .ios-table td:last-child {
+    border-right: none;
+}
+
+.ios-table td {
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--ios-gray);
+    border-right: 1px solid var(--ios-gray);
+    vertical-align: middle;
+}
+
+.ios-table tr:last-child td {
+    border-bottom: none;
+}
+
+.ios-table input {
+    width: 100%;
+    border: none;
+    font-size: 15px;
+    background: transparent;
+    outline: none;
+    color: var(--ios-text);
+    text-align: left;
+    margin: 0;
+}
+
+.ios-table td:first-child {
+    text-align: center;
+    font-weight: 500;
+}
+
+/* ===== TIME SLOT BUILDER ===== */
+.time-slot-entry {
+    background: #F8F8F8;
+    border: 1px solid #E3E3E8;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
+}
+.slot-days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 12px;
+}
+.slot-day-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ios-text-secondary);
+    cursor: pointer;
+    gap: 4px;
+}
+.slot-day-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: var(--ios-blue);
+}
+.slot-time-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+.slot-time-block {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ios-text-secondary);
+}
+.slot-time-block select {
+    border: 1px solid var(--ios-gray);
+    border-radius: 6px;
+    padding: 6px 4px;
+    font-size: 16px;
+    font-family: inherit;
+    background: white;
+    -webkit-appearance: none;
+    text-align: center;
+    width: 58px;
+}
+.slot-arrow {
+    font-size: 18px;
+    color: var(--ios-blue);
+    padding: 0 4px;
+}
+.slot-date-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+.slot-date-row > div label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ios-text-secondary);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+}
+.slot-date-row input[type="date"] {
+    width: 100%;
+    border: 1px solid var(--ios-gray);
+    border-radius: 6px;
+    padding: 7px 8px;
+    font-size: 14px;
+    font-family: inherit;
+    background: white;
+}
+.btn-remove-slot {
+    background: none;
+    border: none;
+    color: var(--ios-red);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 4px 0;
+    font-family: inherit;
+}
+.ios-button-secondary {
+    background: none;
+    border: 1.5px solid var(--ios-blue);
+    color: var(--ios-blue);
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    font-family: inherit;
+    transition: background 0.15s;
+}
+.ios-button-secondary:hover {
+    background: #EBF4FF;
+}
+
+/* ===== CONDITIONAL FIELDS ===== */
+.conditional-field {
+    display: none;
+    margin-top: 12px;
+    width: 100%;
+}
+.conditional-field.visible {
+    display: block;
+}
+.conditional-input {
+    width: 100%;
+    border: 1px solid var(--ios-gray);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 16px;
+    font-family: inherit;
+    outline: none;
+    background: white;
+    color: var(--ios-text);
+}
+.conditional-input:focus {
+    border-color: var(--ios-blue);
+}
+
+/* ===== LOGO UPLOAD ===== */
+.logo-upload-area {
+    border: 2px dashed var(--ios-gray);
+    border-radius: 10px;
+    padding: 20px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    margin-top: 8px;
+    width: 100%;
+}
+.logo-upload-area:hover, .logo-upload-area.dragover {
+    border-color: var(--ios-blue);
+    background: #EBF4FF;
+}
+.logo-upload-area p {
+    color: var(--ios-text-secondary);
+    font-size: 14px;
+    margin-top: 8px;
+}
+.logo-upload-area input[type="file"] {
+    display: none;
+}
+#logo-preview {
+    max-width: 120px;
+    max-height: 120px;
+    display: none;
+    margin: 12px auto 0;
+    border-radius: 8px;
+    object-fit: contain;
+    border: 1px solid var(--ios-gray);
+}
