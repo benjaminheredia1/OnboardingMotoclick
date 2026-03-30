@@ -15,6 +15,7 @@ import { SectionD } from "./sections/SectionD"
 import { SectionE } from "./sections/SectionE"
 import { SectionF } from "./sections/SectionF"
 import { SectionG } from "./sections/SectionG"
+import { SectionH } from "./sections/SectionH"
 
 export function OnboardingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -25,21 +26,56 @@ export function OnboardingForm() {
     resolver: zodResolver(onboardingSchema) as any,
     defaultValues: {
       legal_name: "",
-      trade_name: "",
-      contact_name: "",
-      email: "",
-      phone: "",
-      city: "",
-      locations: 1,
-      address: "",
+      dba_name: "",
+      primary_contact_name: "",
+      title_role: "",
+      email_address: "",
+      phone_number: "",
+      city_borough: "",
+      zip_code: "",
+      number_of_locations: 1,
+      business_type: "Restaurant",
+      main_address: "",
       operating_hours: [{ id: 0, days: [], open: "11:00", close: "22:00", valid_from: null, valid_to: null }],
+      
       avg_orders: 0,
-      pain_points: [],
+      avg_ticket: null,
+      peak_hours: "",
+      own_drivers: "No",
+      self_delivering: "No",
+      using_3pl: "No",
+      pain_points: "",
+
       delivery_platforms: [],
-      pos_system: [],
+      pos_system: "",
+      own_website: "No",
+      own_app: "No",
+
+      target_date: new Date(),
+      main_problem: "",
+
       contract_name: "",
+      ein_tax_id: "",
       billing_address: "",
       authorized_signatory: "",
+
+      comm_channel: "Email",
+      notes: "",
+
+      uber_eats_user: "", uber_eats_pass: "",
+      doordash_user: "", doordash_pass: "",
+      grubhub_user: "", grubhub_pass: "",
+      slice_user: "", slice_pass: "",
+      delivery_com_user: "", delivery_com_pass: "",
+      sharebites_user: "", sharebites_pass: "",
+      other_platform_name: "", other_platform_user: "", other_platform_pass: "",
+
+      pos_access_name: "",
+      pos_access_user: "",
+      pos_access_pass: "",
+      pos_access_owner: "",
+      pos_access_phone: "",
+      pos_access_email: "",
     },
   })
 
@@ -102,6 +138,7 @@ export function OnboardingForm() {
             <SectionE />
             <SectionF />
             <SectionG />
+            <SectionH />
 
             <div className="form-footer mt-12 bg-white p-6 rounded-lg shadow-sm border">
               <p className="footer-note text-xs text-gray-500 mb-6 text-center">

@@ -19,6 +19,7 @@ export async function submitRegistration(data: OnboardingFormValues) {
     // Now format data exactly how legacy n8n webhook expects it!
     const payload: any = {
       ...data,
+      target_date: data.target_date ? new Date(data.target_date).toISOString().split('T')[0] : null,
       operating_hours: JSON.stringify(data.operating_hours) // N8N expects a JSON string for this field
     }
 
@@ -39,7 +40,7 @@ export async function submitRegistration(data: OnboardingFormValues) {
       submitData.append('data', pdfBlob, 'onboarding.pdf')
     }
 
-    const response = await fetch(import.meta.env.N8N_URL, {
+    const response = await fetch(import.meta.env.VITE_N8N_URL, {
       method: "POST",
       body: submitData,
     })

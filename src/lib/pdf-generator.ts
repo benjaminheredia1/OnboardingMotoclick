@@ -187,16 +187,16 @@ export function getPdfHtmlTemplate(data: any) {
             <h2>A. Business Information</h2>
             <div class="grid-container">
                 <div class="field"><span class="label">Legal Business Name</span><span class="value">${formatValue(data.legal_name)}</span></div>
-                <div class="field"><span class="label">DBA / Trade Name</span><span class="value">${formatValue(data.trade_name)}</span></div>
-                <div class="field"><span class="label">Primary Contact Name</span><span class="value">${formatValue(data.contact_name)}</span></div>
+                <div class="field"><span class="label">DBA / Trade Name</span><span class="value">${formatValue(data.dba_name)}</span></div>
+                <div class="field"><span class="label">Primary Contact Name</span><span class="value">${formatValue(data.primary_contact_name)}</span></div>
                 <div class="field"><span class="label">Title / Role</span><span class="value">${formatValue(data.title_role)}</span></div>
-                <div class="field"><span class="label">Email Address</span><span class="value">${formatValue(data.email)}</span></div>
-                <div class="field"><span class="label">Phone Number</span><span class="value">${formatValue(data.phone)}</span></div>
-                <div class="field"><span class="label">City / Borough</span><span class="value">${formatValue(data.city)}</span></div>
+                <div class="field"><span class="label">Email Address</span><span class="value">${formatValue(data.email_address)}</span></div>
+                <div class="field"><span class="label">Phone Number</span><span class="value">${formatValue(data.phone_number)}</span></div>
+                <div class="field"><span class="label">City / Borough</span><span class="value">${formatValue(data.city_borough)}</span></div>
                 <div class="field"><span class="label">ZIP Code</span><span class="value">${formatValue(data.zip_code)}</span></div>
-                <div class="field"><span class="label">Number of Locations</span><span class="value">${formatValue(data.locations)}</span></div>
+                <div class="field"><span class="label">Number of Locations</span><span class="value">${formatValue(data.number_of_locations)}</span></div>
                 <div class="field"><span class="label">Business Type</span><span class="value">${formatValue(data.business_type)}</span></div>
-                <div class="field grid-full"><span class="label">Main Address</span><span class="value">${formatValue(data.address)}</span></div>
+                <div class="field grid-full"><span class="label">Main Address</span><span class="value">${formatValue(data.main_address)}</span></div>
                 <div class="field grid-full"><span class="label">Operating Hours</span><div class="value">${formatOperatingHours(data.operating_hours)}</div></div>
             </div>
         </div>
@@ -227,8 +227,7 @@ export function getPdfHtmlTemplate(data: any) {
         <div class="section">
             <h2>D. Motoclick Integration</h2>
             <div class="grid-container">
-                <div class="field"><span class="label">Service Type</span><span class="value">${formatValue(data.service_type)}</span></div>
-                <div class="field"><span class="label">Target Go Live Date</span><span class="value">${formatValue(data.go_live)}</span></div>
+                <div class="field"><span class="label">Target Go Live Date</span><span class="value">${data.target_date ? new Date(data.target_date).toLocaleDateString() : 'N/A'}</span></div>
                 <div class="field grid-full"><span class="label">Main Problem to Solve</span><span class="value">${formatValue(data.main_problem)}</span></div>
             </div>
         </div>
@@ -255,7 +254,7 @@ export function getPdfHtmlTemplate(data: any) {
         <div class="signature-block">
             <div>
                 <br><br><br>
-                <div class="sig-line">Signature - ${formatValue(data.authorized_signatory)}</div>
+                <div class="sig-line">Signature - \${formatValue(data.authorized_signatory)}</div>
                 <div style="text-align: center; font-size: 10px; margin-top:3px;">Authorized Signatory</div>
             </div>
             <div>
@@ -264,7 +263,9 @@ export function getPdfHtmlTemplate(data: any) {
             </div>
         </div>
 
-        <div class="footer">Motoclick Internal Document - Confidential & Proprietary</div>
+        <div class="footer">
+            Motoclick Internal Document - Confidential & Proprietary
+        </div>
     </body>
     </html>
     `;

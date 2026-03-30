@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form"
-import { FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
+import { FormControl, FormField, FormItem, FormMessage, FormLabel } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import type { OnboardingFormValues } from "@/lib/schema"
 
@@ -7,67 +7,89 @@ export function SectionG() {
   const { control } = useFormContext<OnboardingFormValues>()
 
   const platforms = [
-    { label: "DoorDash", user: "cred_doordash_user", pass: "cred_doordash_pass", notes: "cred_doordash_notes" },
-    { label: "Uber Eats", user: "cred_uber_user", pass: "cred_uber_pass", notes: "cred_uber_notes" },
-    { label: "Delivery.com", user: "cred_delivery_user", pass: "cred_delivery_pass", notes: "cred_delivery_notes" },
-    { label: "Own Website/App", user: "cred_own_user", pass: "cred_own_pass", notes: "cred_own_notes" },
+    { label: "UBER EATS", user: "uber_eats_user", pass: "uber_eats_pass" },
+    { label: "DOORDASH", user: "doordash_user", pass: "doordash_pass" },
+    { label: "GRUBHUB", user: "grubhub_user", pass: "grubhub_pass" },
+    { label: "SLICE", user: "slice_user", pass: "slice_pass" },
+    { label: "DELIVERY.COM", user: "delivery_com_user", pass: "delivery_com_pass" },
+    { label: "SHAREBITES", user: "sharebites_user", pass: "sharebites_pass" },
   ] as const;
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center space-x-2 pb-2 border-b border-zinc-200">
-        <span className="text-xl">■</span>
-        <h2 className="text-lg font-bold">Access Credentials</h2>
+      <div className="bg-orange-500 text-white px-4 py-2 uppercase font-semibold text-sm rounded-t-md">
+        G. Platform Account Information
       </div>
       
-      <p className="text-sm text-gray-500 text-center mb-4">
-        Username and password for each platform (DoorDash, Uber, etc.)
-      </p>
+      <div className="p-4 bg-white border border-t-0 rounded-b-md shadow-sm space-y-4">
+        <p className="text-sm text-gray-500 mb-4">
+          Provide Username and Password for each platform you are integrated with. Leave blank if not applicable.
+        </p>
 
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm text-left">
-          <thead className="bg-zinc-100 text-xs uppercase text-gray-700">
-            <tr>
-              <th className="px-4 py-3 w-1/5">Platform</th>
-              <th className="px-4 py-3 w-[30%]">User / Email</th>
-              <th className="px-4 py-3 w-1/4">Password</th>
-              <th className="px-4 py-3 w-1/4">Notes</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y">
-            {platforms.map((platform) => (
-              <tr key={platform.label} className="bg-white hover:bg-zinc-50">
-                <td className="px-4 py-3 font-medium text-gray-900 border-x">
-                  {platform.label}
-                </td>
-                <td className="px-2 py-2 border-r">
-                  <FormField control={control} name={platform.user} render={({ field }) => (
-                    <FormItem>
-                      <FormControl><Input className="h-8 text-xs" {...field} /></FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )} />
-                </td>
-                <td className="px-2 py-2 border-r">
-                  <FormField control={control} name={platform.pass} render={({ field }) => (
-                    <FormItem>
-                      <FormControl><Input className="h-8 text-xs" {...field} /></FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )} />
-                </td>
-                <td className="px-2 py-2 border-r">
-                  <FormField control={control} name={platform.notes} render={({ field }) => (
-                    <FormItem>
-                      <FormControl><Input className="h-8 text-xs" {...field} /></FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )} />
-                </td>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm text-left">
+            <thead className="bg-zinc-100 text-xs uppercase text-gray-700">
+              <tr>
+                <th className="px-4 py-3 w-[35%]">Platform</th>
+                <th className="px-4 py-3 w-[32.5%]">USERNAME</th>
+                <th className="px-4 py-3 w-[32.5%]">PASSWORD</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y">
+              {platforms.map((platform) => (
+                <tr key={platform.label} className="bg-white hover:bg-zinc-50">
+                  <td className="px-4 py-3 text-xs font-semibold text-gray-700 border-x">
+                    {platform.label}
+                  </td>
+                  <td className="px-2 py-2 border-r">
+                    <FormField control={control} name={platform.user} render={({ field }) => (
+                      <FormItem>
+                        <FormControl><Input className="h-9 text-xs" {...field} /></FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )} />
+                  </td>
+                  <td className="px-2 py-2 border-r">
+                    <FormField control={control} name={platform.pass} render={({ field }) => (
+                      <FormItem>
+                        <FormControl><Input className="h-9 text-xs" {...field} /></FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="mt-6 pt-4 border-t border-dashed space-y-4">
+          <p className="font-semibold text-sm text-gray-700">OTHER PLATFORM</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <FormField control={control} name="other_platform_name" render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-xs">NAME</FormLabel>
+                <FormControl><Input className="h-9" placeholder="e.g. ChowNow" {...field} /></FormControl>
+                <FormMessage />
+              </FormItem>
+            )} />
+            <FormField control={control} name="other_platform_user" render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-xs">USERNAME</FormLabel>
+                <FormControl><Input className="h-9" {...field} /></FormControl>
+                <FormMessage />
+              </FormItem>
+            )} />
+            <FormField control={control} name="other_platform_pass" render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-xs">PASSWORD</FormLabel>
+                <FormControl><Input className="h-9" {...field} /></FormControl>
+                <FormMessage />
+              </FormItem>
+            )} />
+          </div>
+        </div>
+
       </div>
     </div>
   )

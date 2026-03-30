@@ -5,18 +5,11 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
+import { Textarea } from "@/components/ui/textarea"
 import type { OnboardingFormValues } from "@/lib/schema"
 
 export function SectionB() {
   const { control } = useFormContext<OnboardingFormValues>()
-
-  const painPointsOptions = [
-    "Delays",
-    "High costs",
-    "Cancellations",
-    "Support issues",
-    "Multiple issues"
-  ]
 
   const PEAK_HOURS_OPTIONS = [
     "Breakfast (6am - 10am)",
@@ -36,7 +29,7 @@ export function SectionB() {
         
         <FormField control={control} name="avg_orders" render={({ field }) => (
           <FormItem>
-            <FormLabel>Average Orders / Day <span className="text-red-500">*</span></FormLabel>
+            <FormLabel>AVERAGE ORDERS / DAY <span className="text-red-500">*</span></FormLabel>
             <FormControl>
               <Input type="number" placeholder="e.g. 30" {...field} />
             </FormControl>
@@ -46,7 +39,7 @@ export function SectionB() {
 
         <FormField control={control} name="avg_ticket" render={({ field }) => (
           <FormItem>
-            <FormLabel>Average Ticket ($)</FormLabel>
+            <FormLabel>AVERAGE TICKET ($)</FormLabel>
             <FormControl>
               <Input type="number" placeholder="e.g. 35" {...field} value={field.value ?? ""} />
             </FormControl>
@@ -67,7 +60,7 @@ export function SectionB() {
 
           return (
             <FormItem>
-              <FormLabel>Peak Hours</FormLabel>
+              <FormLabel>PEAK HOURS</FormLabel>
               <FormControl>
                 <Dialog>
                   <DialogTrigger asChild>
@@ -100,7 +93,7 @@ export function SectionB() {
 
         <FormField control={control} name="own_drivers" render={({ field }) => (
           <FormItem className="space-y-3 pt-4 border-t border-dashed">
-            <FormLabel>Own Delivery Drivers? <span className="text-red-500">*</span></FormLabel>
+            <FormLabel>OWN DELIVERY DRIVERS? <span className="text-red-500">*</span></FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value} className="flex space-x-4">
                 {["Yes", "No", "Partially"].map((opt) => (
@@ -117,7 +110,7 @@ export function SectionB() {
 
         <FormField control={control} name="self_delivering" render={({ field }) => (
           <FormItem className="space-y-3 pt-4 border-t border-dashed">
-            <FormLabel>Currently Self-Delivering? <span className="text-red-500">*</span></FormLabel>
+            <FormLabel>CURRENTLY SELF-DELIVERING? <span className="text-red-500">*</span></FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value} className="flex space-x-4">
                 {["Yes", "No"].map((opt) => (
@@ -134,7 +127,7 @@ export function SectionB() {
 
         <FormField control={control} name="using_3pl" render={({ field }) => (
           <FormItem className="space-y-3 pt-4 border-t border-dashed">
-            <FormLabel>Using DSP or Last Mile Solution?</FormLabel>
+            <FormLabel>DO YOU CURRENTLY USE A LOGISTICS COMPANY FOR YOUR DELIVERIES?</FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value} className="flex space-x-4">
                 {["Yes", "No"].map((opt) => (
@@ -149,40 +142,16 @@ export function SectionB() {
           </FormItem>
         )} />
 
-        <FormField control={control} name="pain_points" render={() => (
-          <FormItem className="space-y-3 pt-4 border-t border-dashed">
-            <FormLabel>Current Pain Points</FormLabel>
-            <div className="grid grid-cols-2 gap-3">
-              {painPointsOptions.map((item) => (
-                <FormField
-                  key={item}
-                  control={control}
-                  name="pain_points"
-                  render={({ field }) => {
-                    return (
-                      <FormItem
-                        key={item}
-                        className="flex flex-row items-start space-x-3 space-y-0"
-                      >
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value?.includes(item)}
-                            onCheckedChange={(checked) => {
-                              return checked
-                                ? field.onChange([...(field.value || []), item])
-                                : field.onChange(field.value?.filter((value) => value !== item))
-                            }}
-                          />
-                        </FormControl>
-                        <FormLabel className="font-normal leading-tight bg-zinc-50 flex-1 p-2 rounded-md border cursor-pointer hover:bg-zinc-100">
-                          {item}
-                        </FormLabel>
-                      </FormItem>
-                    )
-                  }}
-                />
-              ))}
-            </div>
+        <FormField control={control} name="pain_points" render={({ field }) => (
+          <FormItem className="pt-4 border-t border-dashed">
+            <FormLabel>CURRENT PAIN POINTS</FormLabel>
+            <FormControl>
+              <Textarea 
+                placeholder="Describe any pain points here..." 
+                className="resize-none h-24" 
+                {...field} 
+              />
+            </FormControl>
             <FormMessage />
           </FormItem>
         )} />

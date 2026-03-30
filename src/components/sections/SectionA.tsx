@@ -17,7 +17,7 @@ export function SectionA() {
       <div className="p-4 bg-white border border-t-0 rounded-b-md shadow-sm space-y-4">
         <FormField control={control} name="legal_name" render={({ field }) => (
           <FormItem>
-            <FormLabel>Legal Business Name <span className="text-red-500">*</span></FormLabel>
+            <FormLabel>LEGAL BUSINESS NAME <span className="text-red-500">*</span></FormLabel>
             <FormControl>
               <Input placeholder="e.g. La Esquina Crioia LLC" {...field} />
             </FormControl>
@@ -25,9 +25,9 @@ export function SectionA() {
           </FormItem>
         )} />
 
-        <FormField control={control} name="trade_name" render={({ field }) => (
+        <FormField control={control} name="dba_name" render={({ field }) => (
           <FormItem>
-            <FormLabel>DBA / Trade Name <span className="text-red-500">*</span></FormLabel>
+            <FormLabel>DBA / TRADE NAME <span className="text-red-500">*</span></FormLabel>
             <FormControl>
               <Input placeholder="e.g. La Esquina" {...field} />
             </FormControl>
@@ -35,9 +35,9 @@ export function SectionA() {
           </FormItem>
         )} />
 
-        <FormField control={control} name="contact_name" render={({ field }) => (
+        <FormField control={control} name="primary_contact_name" render={({ field }) => (
           <FormItem>
-            <FormLabel>Primary Contact Name <span className="text-red-500">*</span></FormLabel>
+            <FormLabel>PRIMARY CONTACT NAME <span className="text-red-500">*</span></FormLabel>
             <FormControl>
               <Input placeholder="Full name" {...field} />
             </FormControl>
@@ -47,7 +47,7 @@ export function SectionA() {
 
         <FormField control={control} name="title_role" render={({ field }) => (
           <FormItem>
-            <FormLabel>Title / Role</FormLabel>
+            <FormLabel>TITLE / ROLE</FormLabel>
             <FormControl>
               <Input placeholder="Owner / Manager / CEO" {...field} />
             </FormControl>
@@ -55,9 +55,9 @@ export function SectionA() {
           </FormItem>
         )} />
 
-        <FormField control={control} name="email" render={({ field }) => (
+        <FormField control={control} name="email_address" render={({ field }) => (
           <FormItem>
-            <FormLabel>Email <span className="text-red-500">*</span></FormLabel>
+            <FormLabel>EMAIL ADDRESS <span className="text-red-500">*</span></FormLabel>
             <FormControl>
               <Input placeholder="contact@restaurant.com" type="email" {...field} />
             </FormControl>
@@ -65,9 +65,9 @@ export function SectionA() {
           </FormItem>
         )} />
 
-        <FormField control={control} name="phone" render={({ field }) => (
+        <FormField control={control} name="phone_number" render={({ field }) => (
           <FormItem>
-            <FormLabel>Phone <span className="text-red-500">*</span></FormLabel>
+            <FormLabel>PHONE NUMBER <span className="text-red-500">*</span></FormLabel>
             <FormControl>
               <Input placeholder="+1 (718) 555-0000" type="tel" {...field} />
             </FormControl>
@@ -75,9 +75,9 @@ export function SectionA() {
           </FormItem>
         )} />
 
-        <FormField control={control} name="city" render={({ field }) => (
+        <FormField control={control} name="city_borough" render={({ field }) => (
           <FormItem>
-            <FormLabel>City / Borough <span className="text-red-500">*</span></FormLabel>
+            <FormLabel>CITY / BOROUGH <span className="text-red-500">*</span></FormLabel>
             <FormControl>
               <Input placeholder="Brooklyn / Manhattan..." {...field} />
             </FormControl>
@@ -87,7 +87,7 @@ export function SectionA() {
 
         <FormField control={control} name="zip_code" render={({ field }) => (
           <FormItem>
-            <FormLabel>ZIP Code</FormLabel>
+            <FormLabel>ZIP CODE</FormLabel>
             <FormControl>
               <Input placeholder="11201" {...field} />
             </FormControl>
@@ -95,9 +95,9 @@ export function SectionA() {
           </FormItem>
         )} />
 
-        <FormField control={control} name="locations" render={({ field }) => (
+        <FormField control={control} name="number_of_locations" render={({ field }) => (
           <FormItem>
-            <FormLabel>Number of Locations <span className="text-red-500">*</span></FormLabel>
+            <FormLabel>NUMBER OF LOCATIONS <span className="text-red-500">*</span></FormLabel>
             <FormControl>
               <Input type="number" placeholder="e.g. 1" {...field} />
             </FormControl>
@@ -105,19 +105,9 @@ export function SectionA() {
           </FormItem>
         )} />
 
-        <FormField control={control} name="address" render={({ field }) => (
-          <FormItem>
-            <FormLabel>Main Address <span className="text-red-500">*</span></FormLabel>
-            <FormControl>
-              <Input placeholder="Street, City, State, ZIP" {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )} />
-
         <FormField control={control} name="business_type" render={({ field }) => (
           <FormItem className="space-y-3 pt-4">
-            <FormLabel>Business Type <span className="text-red-500">*</span></FormLabel>
+            <FormLabel>BUSINESS TYPE <span className="text-red-500">*</span></FormLabel>
             <FormControl>
               <RadioGroup
                 onValueChange={field.onChange}
@@ -140,8 +130,18 @@ export function SectionA() {
           </FormItem>
         )} />
 
+        <FormField control={control} name="main_address" render={({ field }) => (
+          <FormItem>
+            <FormLabel>MAIN ADDRESS <span className="text-red-500">*</span></FormLabel>
+            <FormControl>
+              <Input placeholder="Street, City, State, ZIP" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )} />
+
         <div className="pt-6">
-          <label className="text-sm font-medium leading-none mb-4 block">Operating Hours</label>
+          <label className="text-sm font-medium leading-none mb-4 block">OPERATING HOURS</label>
           <OperatingHours />
         </div>
       </div>

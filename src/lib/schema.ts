@@ -11,16 +11,15 @@ export const operatingHoursSlotSchema = z.object({
 
 export const onboardingSchema = z.object({
   // Section A
-  legal_name: z.string().min(1, "Legal Name is required"),
-  trade_name: z.string().min(1, "Trade Name is required"),
-  contact_name: z.string().min(1, "Primary Contact Name is required"),
+  legal_name: z.string().min(1, "Legal Business Name is required"),
+  dba_name: z.string().min(1, "DBA / Trade Name is required"),
+  primary_contact_name: z.string().min(1, "Primary Contact Name is required"),
   title_role: z.string().optional(),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(1, "Phone number is required"),
-  city: z.string().min(1, "City / Borough is required"),
+  email_address: z.string().email("Invalid email address"),
+  phone_number: z.string().min(1, "Phone number is required"),
+  city_borough: z.string().min(1, "City / Borough is required"),
   zip_code: z.string().optional(),
-  locations: z.coerce.number().min(1, "Must be at least 1 location"),
-  address: z.string().min(1, "Main Address is required"),
+  number_of_locations: z.coerce.number().min(1, "Must be at least 1 location"),
   business_type: z.enum([
     "Restaurant",
     "Bakery",
@@ -29,6 +28,7 @@ export const onboardingSchema = z.object({
     "Chain",
     "Franchise",
   ]),
+  main_address: z.string().min(1, "Main Address is required"),
   operating_hours: z.array(operatingHoursSlotSchema).min(1, "At least one operating hours slot is required"),
 
   // Section B
@@ -38,19 +38,16 @@ export const onboardingSchema = z.object({
   own_drivers: z.enum(["Yes", "No", "Partially"]),
   self_delivering: z.enum(["Yes", "No"]),
   using_3pl: z.enum(["Yes", "No"]).optional(),
-  pain_points: z.array(z.string()).optional().default([]),
+  pain_points: z.string().optional(),
 
   // Section C
   delivery_platforms: z.array(z.string()).optional().default([]),
-  pos_system: z.array(z.string()).optional().default([]),
-  pos_system_other: z.string().optional(),
+  pos_system: z.string().optional(),
   own_website: z.enum(["Yes", "No"]).optional(),
-  website_url: z.string().optional(),
   own_app: z.enum(["Yes", "No"]).optional(),
-  app_link: z.string().optional(),
 
   // Section D
-  service_type: z.enum(["API", "Own Integration"]),
+  target_date: z.date(),
   main_problem: z.string().optional(),
 
   // Section E
@@ -60,25 +57,33 @@ export const onboardingSchema = z.object({
   authorized_signatory: z.string().min(1, "Authorized Signatory is required"),
 
   // Section F
-  comm_channel: z.enum(["Slack", "WhatsApp", "Email"]),
+  comm_channel: z.string().optional(),
   notes: z.string().optional(),
 
   // Section G
-  cred_doordash_user: z.string().optional(),
-  cred_doordash_pass: z.string().optional(),
-  cred_doordash_notes: z.string().optional(),
+  uber_eats_user: z.string().optional(),
+  uber_eats_pass: z.string().optional(),
+  doordash_user: z.string().optional(),
+  doordash_pass: z.string().optional(),
+  grubhub_user: z.string().optional(),
+  grubhub_pass: z.string().optional(),
+  slice_user: z.string().optional(),
+  slice_pass: z.string().optional(),
+  delivery_com_user: z.string().optional(),
+  delivery_com_pass: z.string().optional(),
+  sharebites_user: z.string().optional(),
+  sharebites_pass: z.string().optional(),
+  other_platform_name: z.string().optional(),
+  other_platform_user: z.string().optional(),
+  other_platform_pass: z.string().optional(),
 
-  cred_uber_user: z.string().optional(),
-  cred_uber_pass: z.string().optional(),
-  cred_uber_notes: z.string().optional(),
-
-  cred_delivery_user: z.string().optional(),
-  cred_delivery_pass: z.string().optional(),
-  cred_delivery_notes: z.string().optional(),
-
-  cred_own_user: z.string().optional(),
-  cred_own_pass: z.string().optional(),
-  cred_own_notes: z.string().optional(),
+  // Section H
+  pos_access_name: z.string().optional(),
+  pos_access_user: z.string().optional(),
+  pos_access_pass: z.string().optional(),
+  pos_access_owner: z.string().optional(),
+  pos_access_phone: z.string().optional(),
+  pos_access_email: z.string().optional(),
 });
 
 export type OnboardingFormValues = z.infer<typeof onboardingSchema>;

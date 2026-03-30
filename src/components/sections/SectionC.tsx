@@ -6,16 +6,9 @@ import { Checkbox } from "@/components/ui/checkbox"
 import type { OnboardingFormValues } from "@/lib/schema"
 
 export function SectionC() {
-  const { control, watch } = useFormContext<OnboardingFormValues>()
-
-  const posSystemValues = watch("pos_system") || [];
-  const hasOtherPos = posSystemValues.includes("Other");
-  
-  const ownWebsite = watch("own_website");
-  const ownApp = watch("own_app");
+  const { control } = useFormContext<OnboardingFormValues>()
 
   const platforms = ["Uber Eats", "DoorDash", "Grubhub", "None"];
-  const posSystems = ["Toast", "Deliverect", "Square/Clover", "ChowNow/Olo", "Other", "None"];
 
   return (
     <div className="space-y-6">
@@ -27,7 +20,7 @@ export function SectionC() {
         
         <FormField control={control} name="delivery_platforms" render={() => (
           <FormItem className="space-y-3">
-            <FormLabel>Active Delivery Platforms</FormLabel>
+            <FormLabel>ACTIVE DELIVERY PLATFORMS</FormLabel>
             <div className="grid grid-cols-2 gap-3">
               {platforms.map((item) => (
                 <FormField
@@ -60,55 +53,19 @@ export function SectionC() {
           </FormItem>
         )} />
 
-        <FormField control={control} name="pos_system" render={() => (
+        <FormField control={control} name="pos_system" render={({ field }) => (
           <FormItem className="space-y-3 pt-4 border-t border-dashed">
-            <FormLabel>POS / Middleware System</FormLabel>
-            <div className="grid grid-cols-2 gap-3">
-              {posSystems.map((item) => (
-                <FormField
-                  key={item}
-                  control={control}
-                  name="pos_system"
-                  render={({ field }) => {
-                    return (
-                      <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value?.includes(item)}
-                            onCheckedChange={(checked) => {
-                              return checked
-                                ? field.onChange([...(field.value || []), item])
-                                : field.onChange(field.value?.filter((val) => val !== item))
-                            }}
-                          />
-                        </FormControl>
-                        <FormLabel className="font-normal cursor-pointer flex-1 bg-zinc-50 border p-2 rounded-md hover:bg-zinc-100">
-                          {item}
-                        </FormLabel>
-                      </FormItem>
-                    )
-                  }}
-                />
-              ))}
-            </div>
+            <FormLabel>POS / MIDDLEWARE SYSTEM</FormLabel>
+            <FormControl>
+              <Input placeholder="e.g. Toast, Square, None..." {...field} />
+            </FormControl>
             <FormMessage />
           </FormItem>
         )} />
-
-        {hasOtherPos && (
-          <FormField control={control} name="pos_system_other" render={({ field }) => (
-            <FormItem className="pl-8 -mt-2">
-              <FormControl>
-                <Input placeholder="Specify your POS / system name..." {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )} />
-        )}
 
         <FormField control={control} name="own_website" render={({ field }) => (
           <FormItem className="space-y-3 pt-4 border-t border-dashed">
-            <FormLabel>Own Website with Orders?</FormLabel>
+            <FormLabel>OWN WEBSITE WITH ORDERS?</FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value} className="flex space-x-4">
                 {["Yes", "No"].map((opt) => (
@@ -122,21 +79,10 @@ export function SectionC() {
             <FormMessage />
           </FormItem>
         )} />
-
-        {ownWebsite === "Yes" && (
-          <FormField control={control} name="website_url" render={({ field }) => (
-            <FormItem className="pl-8 -mt-2">
-              <FormControl>
-                <Input type="url" placeholder="https://www.yourwebsite.com" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )} />
-        )}
 
         <FormField control={control} name="own_app" render={({ field }) => (
           <FormItem className="space-y-3 pt-4 border-t border-dashed">
-            <FormLabel>Own App?</FormLabel>
+            <FormLabel>OWN APP?</FormLabel>
             <FormControl>
               <RadioGroup onValueChange={field.onChange} value={field.value} className="flex space-x-4">
                 {["Yes", "No"].map((opt) => (
@@ -150,17 +96,6 @@ export function SectionC() {
             <FormMessage />
           </FormItem>
         )} />
-
-        {ownApp === "Yes" && (
-          <FormField control={control} name="app_link" render={({ field }) => (
-            <FormItem className="pl-8 -mt-2">
-              <FormControl>
-                <Input type="url" placeholder="App Store or Play Store link..." {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )} />
-        )}
 
       </div>
     </div>
