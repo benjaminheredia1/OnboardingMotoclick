@@ -16,11 +16,10 @@ export async function submitRegistration(data: OnboardingFormValues) {
       URL.revokeObjectURL(url)
     }
 
-    // Now format data exactly how legacy n8n webhook expects it!
     const payload: any = {
       ...data,
       target_date: data.target_date ? new Date(data.target_date).toISOString().split('T')[0] : null,
-      operating_hours: JSON.stringify(data.operating_hours) // N8N expects a JSON string for this field
+      operating_hours: JSON.stringify(data.operating_hours) 
     }
 
     const submitData = new FormData()

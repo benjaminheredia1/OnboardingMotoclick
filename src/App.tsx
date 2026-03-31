@@ -1,9 +1,13 @@
-import { OnboardingForm } from "./components/OnboardingForm"
+import { OnboardingForm } from "./components/OnboardingForm";
+import { ParticlesBackground } from "./components/ParticlesBackground";
 
 function App() {
   return (
-    <OnboardingForm />
-  )
+    <>
+      <ParticlesBackground />
+      <OnboardingForm />
+    </>
+  );
 }
 
-export default App
+export default App;
