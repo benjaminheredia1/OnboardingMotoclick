@@ -3,7 +3,6 @@ import type { OnboardingFormValues } from "./schema"
 
 export async function submitRegistration(data: OnboardingFormValues) {
   try {
-    // We must pass operating_hours directly for PDF to consume it correctly (as an array/object)
     const pdfBlob = await generatePdfBlob(data)
     if (pdfBlob) {
       const url = URL.createObjectURL(pdfBlob)
@@ -26,20 +25,16 @@ export async function submitRegistration(data: OnboardingFormValues) {
 
     for (const key in payload) {
       if (Array.isArray(payload[key])) {
-        // Send arrays as multiple fields suffixing [], n8n webhook parses this into an array
         payload[key].forEach((val: any) => submitData.append(`${key}[]`, val))
       } else if (payload[key] !== null && payload[key] !== undefined) {
         submitData.append(key, payload[key])
       }
     }
-
-    // Append the PDF as a binary file called "data"
-    // By calling it "data", n8n places it in the "data" binary property!
     if (pdfBlob) {
       submitData.append('data', pdfBlob, 'onboarding.pdf')
     }
 
-    const response = await fetch(import.meta.env.VITE_N8N_URL, {
+    const response = await fetch(import.meta.env.VITE_N8N_URL + "/register-client", {
       method: "POST",
       body: submitData,
     })
@@ -50,7 +45,6 @@ export async function submitRegistration(data: OnboardingFormValues) {
 
     return await response.json().catch(() => ({}))
   } catch (error) {
-    console.error("Submission error:", error)
     throw error
   }
 }

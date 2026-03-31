@@ -4,13 +4,11 @@ import { type MotoclickClientOnboardingForm } from "./interfaces/pdf.interface";
 const formatValue = (val: any) => {
   if (val === undefined || val === null || val === "") return "N/A";
   if (typeof val === "boolean") return val ? "Sí" : "No";
-  // Pequeña mejora para que los arreglos vacíos (como delivery_platforms) se vean bien
   if (Array.isArray(val)) return val.length > 0 ? val.join(", ") : "N/A";
   return val;
 };
 
 export const template = (data: MotoclickClientOnboardingForm) => {
-  // Variables de estilo (Colores más apagados y fuentes más grandes/gruesas)
   const mutedOrange = "#93683D";
   const h2Style = `font-size: 17px; font-weight: 700; margin-top: 25px; margin-bottom: 12px; color: white; background-color: ${mutedOrange}; padding: 10px 15px; text-transform: uppercase;`;
   const containerStyle =
