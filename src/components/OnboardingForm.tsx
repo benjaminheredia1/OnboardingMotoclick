@@ -16,13 +16,11 @@ import { SectionE } from "./sections/SectionE";
 import { SectionF } from "./sections/SectionF";
 import { SectionG } from "./sections/SectionG";
 import { SectionH } from "./sections/SectionH";
-import { generatePdfBlob } from "@/lib/pdf-generator";
 
 export function OnboardingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  generatePdfBlob();
 
   const form = useForm<any>({
     resolver: zodResolver(onboardingSchema) as any,

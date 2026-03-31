@@ -1,4 +1,5 @@
 import logoHeader from "@/assets/header.png";
+import { type MotoclickClientOnboardingForm } from "./interfaces/pdf.interface";
 
 const formatValue = (val: any) => {
   if (val === undefined || val === null || val === "") return "N/A";
@@ -8,8 +9,7 @@ const formatValue = (val: any) => {
   return val;
 };
 
-// Le ponemos 'any' por ahora para que no pelee con tu antigua interfaz
-export const template = (data: any) => {
+export const template = (data: MotoclickClientOnboardingForm) => {
   // Variables de estilo (Colores más apagados y fuentes más grandes/gruesas)
   const mutedOrange = "#93683D";
   const h2Style = `font-size: 17px; font-weight: 700; margin-top: 25px; margin-bottom: 12px; color: white; background-color: ${mutedOrange}; padding: 10px 15px; text-transform: uppercase;`;

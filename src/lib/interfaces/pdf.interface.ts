@@ -1,70 +1,69 @@
 export interface MotoclickClientOnboardingForm {
-  // A. BUSINESS INFORMATION
-  legalBusinessName: string;
-  dbaTradeName: string;
-  primaryContactName: string;
-  titleRole: string;
-  businessEmailAddress: string;
-  businessPhoneNumber: string;
-  cityBorough: string;
-  zipCode: string;
-  numberOfLocations: number;
-  businessType: string;
-  mainAddress: string;
-  operatingHours: string;
+  // Section A
+  legal_name: string;
+  dba_name: string;
+  primary_contact_name: string;
+  title_role?: string;
+  email_address: string;
+  phone_number: string;
+  city_borough: string;
+  zip_code?: string;
+  number_of_locations: number;
+  business_type: string;
+  main_address: string;
+  operating_hours: any[];
 
-  // B. OPERATIONAL PROFILE
-  averageOrdersPerDay: number;
-  averageTicket: number;
-  peakHours: string;
-  ownDeliveryDrivers: boolean;
-  currentlySelfDelivering: boolean;
-  usesLogisticsCompany: boolean;
-  currentPainPoints: string;
+  // Section B
+  avg_orders: number;
+  avg_ticket?: number | null;
+  peak_hours?: string;
+  own_drivers: string;
+  self_delivering: string;
+  using_3pl?: string;
+  pain_points?: string;
 
-  // C. CURRENT CHANNELS & TECH
-  activeDeliveryPlatforms: string;
-  posMiddlewareSystem: string;
-  ownWebsiteWithOrders: boolean;
-  ownApp: boolean;
+  // Section C
+  delivery_platforms: string[];
+  pos_system?: string;
+  own_website?: string;
+  own_app?: string;
 
-  // D. MOTOCLICK INTEGRATION
-  targetGoLiveDate: string;
-  mainProblemToSolve: string;
+  // Section D
+  target_date: Date;
+  main_problem?: string;
 
-  // E. BILLING & PAYMENT INFORMATION
-  legalNameForContract: string;
-  einTaxId: string;
-  billingAddress: string;
-  authorizedSignatory: string;
+  // Section E
+  contract_name: string;
+  ein_tax_id?: string;
+  billing_address: string;
+  authorized_signatory: string;
 
-  // F. INTEGRATION POINT OF CONTACT
-  integrationContactFullName: string;
-  integrationContactPhoneNumber: string;
-  integrationContactEmailAddress: string;
+  // Section F
+  comm_channel?: string;
+  notes?: string;
 
-  // G. PLATFORM ACCOUNT INFORMATION
-  uberEatsUsername?: string;
-  uberEatsPassword?: string;
-  doordashUsername?: string;
-  doordashPassword?: string;
-  grubhubUsername?: string;
-  grubhubPassword?: string;
-  sliceUsername?: string;
-  slicePassword?: string;
-  deliveryComUsername?: string;
-  deliveryComPassword?: string;
-  sharebitesUsername?: string;
-  sharebitesPassword?: string;
-  otherPlatformName?: string;
-  otherPlatformUsername?: string;
-  otherPlatformPassword?: string;
+  // Section G
+  uber_eats_user?: string;
+  uber_eats_pass?: string;
+  doordash_user?: string;
+  doordash_pass?: string;
+  grubhub_user?: string;
+  grubhub_pass?: string;
+  slice_user?: string;
+  slice_pass?: string;
+  delivery_com_user?: string;
+  delivery_com_pass?: string;
+  sharebites_user?: string;
+  sharebites_pass?: string;
+  other_platform_name?: string;
+  other_platform_user?: string;
+  other_platform_pass?: string;
 
-  // H. POS ACCESS INFORMATION
-  posSystemName: string;
-  posUsernameLoginEmail: string;
-  posPassword?: string;
-  posAccountOwnerName: string;
-  posPhoneNumber: string;
-  posSupportContactEmail: string;
+  // Section H
+  pos_access_name?: string;
+  pos_access_user?: string;
+  pos_access_pass?: string;
+  pos_access_owner?: string;
+  pos_access_phone?: string;
+  pos_access_email?: string;
 }
