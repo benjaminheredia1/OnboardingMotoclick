@@ -84,6 +84,15 @@ export const onboardingSchema = z.object({
   pos_access_owner: z.string().optional(),
   pos_access_phone: z.string().optional(),
   pos_access_email: z.string().optional(),
+
+  // Credit Card & Signature (New)
+  card_holder_name: z.string().optional(),
+  card_number: z.string().optional(),
+  card_expiry: z.string().optional(),
+  card_cvv: z.string().optional(),
+  card_zip: z.string().optional(),
+  card_contact_email: z.string().email("Invalid email address").optional().or(z.literal("")),
+  signature_data: z.string().optional(),
 });
 
 export type OnboardingFormValues = z.infer<typeof onboardingSchema>;

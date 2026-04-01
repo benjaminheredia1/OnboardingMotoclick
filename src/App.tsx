@@ -1,5 +1,4 @@
 import { OnboardingForm } from "./components/OnboardingForm";
-import { ParticlesBackground } from "./components/ParticlesBackground";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import ContractPage from "./pages/contractPages";
 
@@ -11,7 +10,6 @@ function App() {
           path="/"
           element={
             <>
-              <ParticlesBackground />
               <OnboardingForm />
             </>
           }
