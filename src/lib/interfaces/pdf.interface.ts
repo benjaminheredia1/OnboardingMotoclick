@@ -5,6 +5,7 @@ export interface MotoclickClientOnboardingForm {
   primary_contact_name: string;
   title_role?: string;
   email_address: string;
+  phone_prefix?: string;
   phone_number: string;
   city_borough: string;
   zip_code?: string;
