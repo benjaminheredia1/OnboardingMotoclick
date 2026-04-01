@@ -1,0 +1,8 @@
+services: 
+  web:
+    build:
+      context: .
+      args:
+        VITE_N8N_URL: ${VITE_N8N_URL}
+    ports:
+      - "${VITE_N8N_PORT}:80"
