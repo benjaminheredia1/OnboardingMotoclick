@@ -7,7 +7,7 @@ export function SectionE() {
   const { control } = useFormContext<OnboardingFormValues>()
 
   return (
-    <div className="space-y-6">
+    <div className="">
       <div className="bg-orange-500 text-white px-4 py-2 uppercase font-semibold text-sm rounded-t-md">
         E. Billing & Payment Information
       </div>
@@ -23,7 +23,7 @@ export function SectionE() {
           <FormItem>
             <FormLabel>LEGAL NAME FOR CONTRACT <span className="text-red-500">*</span></FormLabel>
             <FormControl>
-              <Input placeholder="e.g. La Esquina LLC" {...field} />
+              <Input placeholder="e.g. La Esquina LLC" maxLength={100} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -33,7 +33,7 @@ export function SectionE() {
           <FormItem>
             <FormLabel>EIN / TAX ID</FormLabel>
             <FormControl>
-              <Input placeholder="e.g. 12-3456789" {...field} />
+              <Input placeholder="e.g. 12-3456789" maxLength={100} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -43,7 +43,7 @@ export function SectionE() {
           <FormItem>
             <FormLabel>BILLING ADDRESS <span className="text-red-500">*</span></FormLabel>
             <FormControl>
-              <Input placeholder="Street, City, State, ZIP" {...field} />
+              <Input placeholder="Street, City, State, ZIP" maxLength={100} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -53,7 +53,7 @@ export function SectionE() {
           <FormItem>
             <FormLabel>AUTHORIZED SIGNATORY <span className="text-red-500">*</span></FormLabel>
             <FormControl>
-              <Input placeholder="Full name of person signing" {...field} />
+              <Input placeholder="Full name of person signing" maxLength={100} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

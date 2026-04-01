@@ -20,7 +20,7 @@ export function SectionB() {
   ]
 
   return (
-    <div className="space-y-6">
+    <div className="">
       <div className="bg-zinc-800 text-white px-4 py-2 uppercase font-semibold text-sm rounded-t-md">
         B. Operational Profile
       </div>

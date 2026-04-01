@@ -31,6 +31,7 @@ export function OnboardingForm() {
       title_role: "",
       email_address: "",
       phone_number: "",
+      phone_prefix: "+1",
       city_borough: "",
       zip_code: "",
       number_of_locations: 1,

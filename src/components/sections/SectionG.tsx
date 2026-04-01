@@ -16,7 +16,7 @@ export function SectionG() {
   ] as const;
 
   return (
-    <div className="space-y-6">
+    <div className="">
       <div className="bg-orange-500 text-white px-4 py-2 uppercase font-semibold text-sm rounded-t-md">
         G. Platform Account Information
       </div>
@@ -69,7 +69,7 @@ export function SectionG() {
             <FormField control={control} name="other_platform_name" render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-xs">NAME</FormLabel>
-                <FormControl><Input className="h-9" placeholder="e.g. ChowNow" {...field} /></FormControl>
+                <FormControl><Input className="h-9" placeholder="e.g. ChowNow" maxLength={100} {...field} /></FormControl>
                 <FormMessage />
               </FormItem>
             )} />

@@ -11,14 +11,18 @@ export const operatingHoursSlotSchema = z.object({
 
 export const onboardingSchema = z.object({
   // Section A
-  legal_name: z.string().min(1, "Legal Business Name is required"),
-  dba_name: z.string().min(1, "DBA / Trade Name is required"),
-  primary_contact_name: z.string().min(1, "Primary Contact Name is required"),
-  title_role: z.string().optional(),
-  email_address: z.string().email("Invalid email address"),
-  phone_number: z.string().min(1, "Phone number is required"),
-  city_borough: z.string().min(1, "City / Borough is required"),
-  zip_code: z.string().optional(),
+  legal_name: z.string().min(1, "Legal Business Name is required").max(100, "Max 100 characters"),
+  dba_name: z.string().min(1, "DBA / Trade Name is required").max(100, "Max 100 characters"),
+  primary_contact_name: z.string().min(1, "Primary Contact Name is required").max(100, "Max 100 characters"),
+  title_role: z.string().max(100, "Max 100 characters").optional(),
+  email_address: z.string().email("Invalid email address").max(100, "Max 100 characters"),
+  phone_prefix: z.string().min(1, "Country code is required"),
+  phone_number: z.string()
+    .min(1, "Phone number is required")
+    .max(30, "Max 30 digits")
+    .regex(/^\d+$/, "Only numbers are allowed"),
+  city_borough: z.string().min(1, "City / Borough is required").max(100, "Max 100 characters"),
+  zip_code: z.string().max(20, "Max 20 characters").optional(),
   number_of_locations: z.coerce.number().min(1, "Must be at least 1 location"),
   business_type: z.enum([
     "Restaurant",
@@ -28,7 +32,7 @@ export const onboardingSchema = z.object({
     "Chain",
     "Franchise",
   ]),
-  main_address: z.string().min(1, "Main Address is required"),
+  main_address: z.string().min(1, "Main Address is required").max(100, "Max 100 characters"),
   operating_hours: z.array(operatingHoursSlotSchema).min(1, "At least one operating hours slot is required"),
 
   // Section B

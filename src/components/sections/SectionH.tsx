@@ -7,7 +7,7 @@ export function SectionH() {
   const { control } = useFormContext<OnboardingFormValues>()
 
   return (
-    <div className="space-y-6">
+    <div className="">
       <div className="bg-zinc-800 text-white px-4 py-2 uppercase font-semibold text-sm rounded-t-md">
         H. POS Access Information
       </div>
@@ -18,7 +18,7 @@ export function SectionH() {
           <FormItem>
             <FormLabel>POS SYSTEM NAME (e.g., Toast, Square POS, Revel POS, Clover, Lightspeed)</FormLabel>
             <FormControl>
-              <Input placeholder="System Name" {...field} />
+              <Input placeholder="System Name" maxLength={100} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -29,7 +29,7 @@ export function SectionH() {
             <FormItem>
               <FormLabel>USERNAME / LOGIN EMAIL</FormLabel>
               <FormControl>
-                <Input placeholder="Login identifier" {...field} />
+                <Input placeholder="Login identifier" maxLength={100} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -39,7 +39,7 @@ export function SectionH() {
             <FormItem>
               <FormLabel>PASSWORD</FormLabel>
               <FormControl>
-                <Input placeholder="Password" {...field} />
+                <Input placeholder="Password" maxLength={100} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -50,7 +50,7 @@ export function SectionH() {
           <FormItem className="pt-2">
             <FormLabel>ACCOUNT OWNER NAME</FormLabel>
             <FormControl>
-              <Input placeholder="Owner name" {...field} />
+              <Input placeholder="Owner name" maxLength={100} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -61,7 +61,7 @@ export function SectionH() {
             <FormItem>
               <FormLabel>PHONE NUMBER</FormLabel>
               <FormControl>
-                <Input type="tel" placeholder="+1 (718) 555-0000" {...field} />
+                <Input type="tel" placeholder="+1 (718) 555-0000" maxLength={100} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -71,7 +71,7 @@ export function SectionH() {
             <FormItem>
               <FormLabel>SUPPORT CONTACT EMAIL</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="support@pos.com" {...field} />
+                <Input type="email" placeholder="support@pos.com" maxLength={100} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

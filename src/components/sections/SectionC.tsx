@@ -11,7 +11,7 @@ export function SectionC() {
   const platforms = ["Uber Eats", "DoorDash", "Grubhub", "None"];
 
   return (
-    <div className="space-y-6">
+    <div className="">
       <div className="bg-zinc-800 text-white px-4 py-2 uppercase font-semibold text-sm rounded-t-md">
         C. Current Channels & Tech
       </div>
@@ -57,7 +57,7 @@ export function SectionC() {
           <FormItem className="space-y-3 pt-4 border-t border-dashed">
             <FormLabel>POS / MIDDLEWARE SYSTEM</FormLabel>
             <FormControl>
-              <Input placeholder="e.g. Toast, Square, None..." {...field} />
+              <Input placeholder="e.g. Toast, Square, None..." maxLength={100} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
