@@ -33,7 +33,7 @@ export function SectionE() {
           <FormItem>
             <FormLabel>EIN / TAX ID</FormLabel>
             <FormControl>
-              <Input placeholder="e.g. 12-3456789" maxLength={100} {...field} />
+              <Input placeholder="e.g. 12-3456789" maxLength={50} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -43,7 +43,7 @@ export function SectionE() {
           <FormItem>
             <FormLabel>BILLING ADDRESS <span className="text-red-500">*</span></FormLabel>
             <FormControl>
-              <Input placeholder="Street, City, State, ZIP" maxLength={100} {...field} />
+              <Input placeholder="Street, City, State, ZIP" maxLength={200} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

@@ -119,11 +119,11 @@ export function OnboardingForm() {
 
   const onValidationError = (errors: any) => {
     if (errors.operating_hours) {
-      setTitle("Faltan Horarios");
-      setDescription("Por favor agrega al menos un horario de funcionamiento.");
+      setTitle("Missing Operating Hours");
+      setDescription("Please add at least one operating hours slot.");
     } else {
-      setTitle("Formulario Incompleto");
-      setDescription("Por favor revisa todos los campos obligatorios.");
+      setTitle("Incomplete Form");
+      setDescription("Please check all required fields.");
     }
     setShowAlert(true);
 

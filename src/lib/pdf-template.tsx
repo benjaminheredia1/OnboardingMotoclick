@@ -113,7 +113,8 @@ export const template = (data: MotoclickClientOnboardingForm) => {
         <h2 style="${h2Style}">C. Technology & Platforms</h2>
         <div style="${containerStyle}">
             <div style="${fieldFullStyle}"><span style="${labelStyle}">Delivery Platforms</span><span style="${valueStyle}">${formatValue(data.delivery_platforms)}</span></div>
-            <div style="${fieldHalfStyle}"><span style="${labelStyle}">POS / Middleware System</span><span style="${valueStyle}">${formatValue(data.pos_system)}</span></div>
+            <div style="${fieldHalfStyle}"><span style="${labelStyle}">POS System</span><span style="${valueStyle}">${formatValue(data.pos_system)}</span></div>
+            <div style="${fieldHalfStyle}"><span style="${labelStyle}">Middleware System</span><span style="${valueStyle}">${formatValue(data.middleware_system)}</span></div>
             <div style="${fieldHalfStyle}"><span style="${labelStyle}">Own Website?</span><span style="${valueStyle}">${formatValue(data.own_website)}</span></div>
             <div style="${fieldHalfStyle}"><span style="${labelStyle}">Own App?</span><span style="${valueStyle}">${formatValue(data.own_app)}</span></div>
         </div>

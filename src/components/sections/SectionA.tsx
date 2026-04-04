@@ -189,7 +189,7 @@ export function SectionA() {
           <FormItem>
             <FormLabel>ZIP CODE</FormLabel>
             <FormControl>
-              <Input placeholder="11201" {...field} />
+              <Input placeholder="11201" maxLength={20} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -234,7 +234,7 @@ export function SectionA() {
           <FormItem>
             <FormLabel>MAIN ADDRESS <span className="text-red-500">*</span></FormLabel>
             <FormControl>
-              <Input placeholder="Street, City, State, ZIP" maxLength={100} {...field} />
+              <Input placeholder="Street, City, State, ZIP" maxLength={200} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

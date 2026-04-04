@@ -25,8 +25,8 @@ export interface MotoclickClientOnboardingForm {
 
   // Section C
   delivery_platforms: string[];
-  pos_system?: string;
-  middleware_system?: string;
+  pos_system: string;
+  middleware_system: string;
   own_website?: string;
   own_app?: string;
 

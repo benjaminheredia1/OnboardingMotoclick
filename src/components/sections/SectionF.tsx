@@ -42,6 +42,7 @@ export function SectionF() {
               <Textarea 
                 placeholder="Any specific requests or requirements..." 
                 className="min-h-[100px]" 
+                maxLength={1000}
                 {...field} 
               />
             </FormControl>

@@ -81,6 +81,7 @@ export function SectionD() {
                 <Textarea
                   placeholder="Describe what you need to improve with Motoclick..."
                   className="resize-none h-24"
+                  maxLength={500}
                   {...field}
                 />
               </FormControl>

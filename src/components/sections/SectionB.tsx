@@ -31,7 +31,7 @@ export function SectionB() {
           <FormItem>
             <FormLabel>AVERAGE ORDERS / DAY <span className="text-red-500">*</span></FormLabel>
             <FormControl>
-              <Input type="number" placeholder="e.g. 30" {...field} />
+              <Input type="number" placeholder="e.g. 30" maxLength={10} {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -41,7 +41,7 @@ export function SectionB() {
           <FormItem>
             <FormLabel>AVERAGE TICKET ($)</FormLabel>
             <FormControl>
-              <Input type="number" placeholder="e.g. 35" {...field} value={field.value ?? ""} />
+              <Input type="number" placeholder="e.g. 35" maxLength={10} {...field} value={field.value ?? ""} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -149,6 +149,7 @@ export function SectionB() {
               <Textarea 
                 placeholder="Describe any pain points here..." 
                 className="resize-none h-24" 
+                maxLength={500}
                 {...field} 
               />
             </FormControl>

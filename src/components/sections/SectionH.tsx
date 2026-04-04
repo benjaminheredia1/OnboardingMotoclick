@@ -61,7 +61,7 @@ export function SectionH() {
             <FormItem>
               <FormLabel>PHONE NUMBER</FormLabel>
               <FormControl>
-                <Input type="tel" placeholder="+1 (718) 555-0000" maxLength={100} {...field} />
+                <Input type="tel" placeholder="+1 (718) 555-0000" maxLength={50} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

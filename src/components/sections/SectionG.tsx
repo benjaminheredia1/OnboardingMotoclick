@@ -44,7 +44,7 @@ export function SectionG() {
                   <td className="px-2 py-2 border-r">
                     <FormField control={control} name={platform.user} render={({ field }) => (
                       <FormItem>
-                        <FormControl><Input className="h-9 text-xs" {...field} /></FormControl>
+                        <FormControl><Input className="h-9 text-xs" maxLength={100} {...field} /></FormControl>
                         <FormMessage />
                       </FormItem>
                     )} />
@@ -52,7 +52,7 @@ export function SectionG() {
                   <td className="px-2 py-2 border-r">
                     <FormField control={control} name={platform.pass} render={({ field }) => (
                       <FormItem>
-                        <FormControl><Input className="h-9 text-xs" {...field} /></FormControl>
+                        <FormControl><Input className="h-9 text-xs" maxLength={100} {...field} /></FormControl>
                         <FormMessage />
                       </FormItem>
                     )} />
@@ -76,14 +76,14 @@ export function SectionG() {
             <FormField control={control} name="other_platform_user" render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-xs">USERNAME</FormLabel>
-                <FormControl><Input className="h-9" {...field} /></FormControl>
+                <FormControl><Input className="h-9" maxLength={100} {...field} /></FormControl>
                 <FormMessage />
               </FormItem>
             )} />
             <FormField control={control} name="other_platform_pass" render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-xs">PASSWORD</FormLabel>
-                <FormControl><Input className="h-9" {...field} /></FormControl>
+                <FormControl><Input className="h-9" maxLength={100} {...field} /></FormControl>
                 <FormMessage />
               </FormItem>
             )} />

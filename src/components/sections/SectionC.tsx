@@ -85,7 +85,7 @@ export function SectionC() {
               <FormItem className="animate-in fade-in slide-in-from-top-2 duration-300">
                 <FormLabel>NAME OF OTHER PLATFORM</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter platform name..." {...field} />
+                  <Input placeholder="Enter platform name..." maxLength={100} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -100,12 +100,44 @@ export function SectionC() {
             <FormItem className="space-y-3 pt-4 border-t border-dashed">
               <FormLabel>POS SYSTEM</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="e.g. Toast, Square, Revel..."
-                  maxLength={100}
-                  {...field}
-                />
+                <RadioGroup
+                  onValueChange={(val) => {
+                    if (val === "None") field.onChange("None");
+                    else field.onChange("");
+                  }}
+                  value={
+                    field.value === "None" ? "None" : field.value ? "Other" : ""
+                  }
+                  className="flex space-x-4 mb-2"
+                >
+                  <FormItem className="flex items-center space-x-2 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="None" />
+                    </FormControl>
+                    <FormLabel className="font-normal cursor-pointer">
+                      None
+                    </FormLabel>
+                  </FormItem>
+                  <FormItem className="flex items-center space-x-2 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="Other" />
+                    </FormControl>
+                    <FormLabel className="font-normal cursor-pointer">
+                      Other
+                    </FormLabel>
+                  </FormItem>
+                </RadioGroup>
               </FormControl>
+              {field.value !== "None" && (
+                <FormControl>
+                  <Input
+                    placeholder="e.g. Toast, Square, Revel..."
+                    maxLength={100}
+                    value={field.value === "None" ? "" : field.value}
+                    onChange={(e) => field.onChange(e.target.value)}
+                  />
+                </FormControl>
+              )}
               <FormMessage />
             </FormItem>
           )}
@@ -116,14 +148,46 @@ export function SectionC() {
           name="middleware_system"
           render={({ field }) => (
             <FormItem className="space-y-3 pt-4 border-t border-dashed">
-              <FormLabel>MIDLAWARE SYSTEM</FormLabel>
+              <FormLabel>MIDDLEWARE SYSTEM</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="e.g. stream , kitchen hub , otter , Chowly..."
-                  maxLength={100}
-                  {...field}
-                />
+                <RadioGroup
+                  onValueChange={(val) => {
+                    if (val === "None") field.onChange("None");
+                    else field.onChange(""); // Switch to 'Other' mode, clear text to force input
+                  }}
+                  value={
+                    field.value === "None" ? "None" : field.value ? "Other" : ""
+                  }
+                  className="flex space-x-4 mb-2"
+                >
+                  <FormItem className="flex items-center space-x-2 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="None" />
+                    </FormControl>
+                    <FormLabel className="font-normal cursor-pointer">
+                      None
+                    </FormLabel>
+                  </FormItem>
+                  <FormItem className="flex items-center space-x-2 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="Other" />
+                    </FormControl>
+                    <FormLabel className="font-normal cursor-pointer">
+                      Other
+                    </FormLabel>
+                  </FormItem>
+                </RadioGroup>
               </FormControl>
+              {field.value !== "None" && (
+                <FormControl>
+                  <Input
+                    placeholder="e.g. Stream, Kitchen Hub, Otter, Chowly..."
+                    maxLength={100}
+                    value={field.value === "None" ? "" : field.value}
+                    onChange={(e) => field.onChange(e.target.value)}
+                  />
+                </FormControl>
+              )}
               <FormMessage />
             </FormItem>
           )}
