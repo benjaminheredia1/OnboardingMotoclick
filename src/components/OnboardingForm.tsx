@@ -16,11 +16,15 @@ import { SectionE } from "./sections/SectionE";
 import { SectionF } from "./sections/SectionF";
 import { SectionG } from "./sections/SectionG";
 import { SectionH } from "./sections/SectionH";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export function OnboardingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [title, setTitle] = useState("Onboarding Form");
+  const [description, setDescription] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   const form = useForm<any>({
     resolver: zodResolver(onboardingSchema) as any,
@@ -58,6 +62,7 @@ export function OnboardingForm() {
 
       delivery_platforms: [],
       pos_system: "",
+      middleware_system: "",
       own_website: "No",
       own_app: "No",
 
@@ -100,11 +105,8 @@ export function OnboardingForm() {
   const onSubmit = async (values: any) => {
     setIsSubmitting(true);
     setError(null);
-    try {
-      if (!values.operating_hours || values.operating_hours.length === 0) {
-        throw new Error("Please add at least one operating hours slot");
-      }
 
+    try {
       await submitRegistration(values);
       setIsSuccess(true);
     } catch (err: any) {
@@ -115,15 +117,30 @@ export function OnboardingForm() {
     }
   };
 
+  const onValidationError = (errors: any) => {
+    if (errors.operating_hours) {
+      setTitle("Faltan Horarios");
+      setDescription("Por favor agrega al menos un horario de funcionamiento.");
+    } else {
+      setTitle("Formulario Incompleto");
+      setDescription("Por favor revisa todos los campos obligatorios.");
+    }
+    setShowAlert(true);
+
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 5000);
+  };
+
   if (isSuccess) {
     return (
-      <div className="ios-app max-w-3xl mx-auto p-4 md:p-8 bg-zinc-50 min-h-screen flex flex-col items-center justify-center">
-        <div className="bg-white p-8 rounded-xl shadow-sm border text-center max-w-md">
-          <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">
+      <div className="flex flex-col items-center justify-center max-w-3xl min-h-screen p-4 mx-auto ios-app md:p-8 bg-zinc-50">
+        <div className="max-w-md p-8 text-center bg-white border shadow-sm rounded-xl">
+          <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 text-3xl text-green-600 bg-green-100 rounded-full">
             ✓
           </div>
-          <h2 className="text-2xl font-bold mb-2">Application Submitted!</h2>
-          <p className="text-gray-600 mb-6">
+          <h2 className="mb-2 text-2xl font-bold">Application Submitted!</h2>
+          <p className="mb-6 text-gray-600">
             Thank you for completing the onboarding form. A Motoclick agent will
             contact you shortly.
           </p>
@@ -136,7 +153,18 @@ export function OnboardingForm() {
   }
 
   return (
-    <div className="ios-app max-w-4xl mx-auto min-h-screen">
+    <div className="max-w-4xl min-h-screen mx-auto ios-app border-x border-[#93683D]/10 bg-white/30">
+      {showAlert && (
+        <Alert className="fixed z-[100] w-[90%] max-w-sm left-1/2 top-4 -translate-x-1/2 shadow-2xl border-orange-200 bg-white/95 backdrop-blur-md animate-in fade-in zoom-in slide-in-from-top-4 duration-300">
+          <AlertTitle className="font-bold text-[#FF6200] flex items-center gap-2">
+            <span className="w-2 h-2 bg-[#FF6200] rounded-full animate-pulse" />
+            {title}
+          </AlertTitle>
+          <AlertDescription className="text-gray-600">
+            {description}
+          </AlertDescription>
+        </Alert>
+      )}
       <header className="ios-navbar flex flex-col items-center w-full mb-8 bg-white/80 backdrop-blur-md overflow-hidden rounded-b-2xl border-b-4 border-[#93683D]">
         <img
           src="/assets/header.png"
@@ -144,15 +172,18 @@ export function OnboardingForm() {
           className="w-full h-auto object-cover bg-[#93683D]/10"
         />
         <div className="w-full py-3 text-center">
-          <p className="text-sm text-gray-600 font-medium">
+          <p className="text-sm font-medium text-gray-600">
             Complete this form to activate your account
           </p>
         </div>
       </header>
 
-      <main className="ios-content px-4 md:px-8">
+      <main className="px-4 ios-content md:px-8">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
+          <form
+            onSubmit={form.handleSubmit(onSubmit, onValidationError)}
+            className="space-y-12"
+          >
             <SectionA />
             <SectionB />
             <SectionC />
@@ -162,15 +193,15 @@ export function OnboardingForm() {
             <SectionG />
             <SectionH />
 
-            <div className="form-footer mt-12 bg-white/70 backdrop-blur-md p-6 rounded-xl shadow-sm border border-white/30">
-              <p className="footer-note text-xs text-gray-500 mb-6 text-center">
+            <div className="p-6 mt-12 border shadow-sm form-footer bg-white/70 backdrop-blur-md rounded-xl border-white/30">
+              <p className="mb-6 text-xs text-center text-gray-500 footer-note">
                 Once submitted, your Motoclick agent will contact you within 2
                 hours - Discovery call within 24 hours - Proposal & contract
                 within 48 hours
               </p>
 
               {error && (
-                <div className="bg-red-50/80 backdrop-blur-sm text-red-600 p-3 rounded mb-4 text-sm border border-red-200">
+                <div className="p-3 mb-4 text-sm text-red-600 border border-red-200 rounded bg-red-50/80 backdrop-blur-sm">
                   {error}
                 </div>
               )}

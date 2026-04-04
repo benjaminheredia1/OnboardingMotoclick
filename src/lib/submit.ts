@@ -15,8 +15,15 @@ export async function submitRegistration(data: OnboardingFormValues) {
       URL.revokeObjectURL(url)
     }
 
+    const finalPlatforms = [...(data.delivery_platforms || [])].filter(p => p !== "Other" && p !== "None");
+    if (data.other_platform_name && data.other_platform_name.trim()) {
+      const otherNames = data.other_platform_name.split(',').map(s => s.trim()).filter(Boolean);
+      finalPlatforms.push(...otherNames);
+    }
+
     const payload: any = {
       ...data,
+      delivery_platforms: finalPlatforms,
       target_date: data.target_date ? new Date(data.target_date).toISOString().split('T')[0] : null,
       operating_hours: JSON.stringify(data.operating_hours) 
     }

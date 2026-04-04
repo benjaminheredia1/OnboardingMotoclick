@@ -47,9 +47,10 @@ export const onboardingSchema = z.object({
   // Section C
   delivery_platforms: z.array(z.string()).optional().default([]),
   pos_system: z.string().optional(),
+  middleware_system: z.string().optional(),
   own_website: z.enum(["Yes", "No"]).optional(),
   own_app: z.enum(["Yes", "No"]).optional(),
-
+  
   // Section D
   target_date: z.date(),
   main_problem: z.string().optional(),
