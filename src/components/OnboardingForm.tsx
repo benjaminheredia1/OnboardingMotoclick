@@ -99,6 +99,7 @@ export function OnboardingForm() {
       pos_access_owner: "",
       pos_access_phone: "",
       pos_access_email: "",
+      other_accounts: [{ name: "", user: "", pass: "" }],
     },
   });
 

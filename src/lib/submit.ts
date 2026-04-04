@@ -15,14 +15,25 @@ export async function submitRegistration(data: OnboardingFormValues) {
       URL.revokeObjectURL(url)
     }
 
+    const otherAccounts = data.other_accounts || [];
+    const otherNamesStr = otherAccounts.map(a => a.name).filter(Boolean).join(", ");
+    const otherUsersStr = otherAccounts.map(a => a.user).filter(Boolean).join(", ");
+    const otherPassesStr = otherAccounts.map(a => a.pass).filter(Boolean).join(", ");
+
     const finalPlatforms = [...(data.delivery_platforms || [])].filter(p => p !== "Other" && p !== "None");
-    if (data.other_platform_name && data.other_platform_name.trim()) {
-      const otherNames = data.other_platform_name.split(',').map(s => s.trim()).filter(Boolean);
-      finalPlatforms.push(...otherNames);
-    }
+    
+    // Add names from other_accounts to finalPlatforms
+    otherAccounts.forEach(acc => {
+      if (acc.name && acc.name.trim()) {
+        finalPlatforms.push(acc.name.trim());
+      }
+    });
 
     const payload: any = {
       ...data,
+      other_platform_name: otherNamesStr,
+      other_platform_user: otherUsersStr,
+      other_platform_pass: otherPassesStr,
       delivery_platforms: finalPlatforms,
       target_date: data.target_date ? new Date(data.target_date).toISOString().split('T')[0] : null,
       operating_hours: JSON.stringify(data.operating_hours) 

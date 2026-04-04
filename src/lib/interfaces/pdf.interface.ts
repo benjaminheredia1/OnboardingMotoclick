@@ -68,4 +68,5 @@ export interface MotoclickClientOnboardingForm {
   pos_access_owner?: string;
   pos_access_phone?: string;
   pos_access_email?: string;
+  other_accounts?: any[];
 }

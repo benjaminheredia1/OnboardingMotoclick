@@ -101,6 +101,11 @@ export const onboardingSchema = z.object({
   card_zip: z.string().max(10, "Max 10 characters").regex(cleanTextRegex, cleanTextMsg).optional(),
   card_contact_email: z.string().email("Invalid email address").optional().or(z.literal("")),
   signature_data: z.string().optional(), // Base64 data, allow
+  other_accounts: z.array(z.object({
+    name: z.string().max(100, "Max 100 characters").optional(),
+    user: z.string().max(100, "Max 100 characters").optional(),
+    pass: z.string().max(100, "Max 100 characters").optional(),
+  })).optional().default([]),
 });
 
 export type OnboardingFormValues = z.infer<typeof onboardingSchema>;
