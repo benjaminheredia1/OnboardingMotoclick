@@ -12,6 +12,8 @@ export interface MotoclickClientOnboardingForm {
   number_of_locations: number;
   business_type: string;
   main_address: string;
+  avg_orders_per_location: number;
+  location_addresses?: string;
   operating_hours: any[];
 
   // Section B
@@ -21,6 +23,7 @@ export interface MotoclickClientOnboardingForm {
   own_drivers: string;
   self_delivering: string;
   using_3pl?: string;
+  using_3pl_use? : string;
   pain_points?: string;
 
   // Section C
@@ -28,7 +31,9 @@ export interface MotoclickClientOnboardingForm {
   pos_system: string;
   middleware_system: string;
   own_website?: string;
+  own_website_url?: string;
   own_app?: string;
+  own_app_url?: string;
 
   // Section D
   target_date: Date;

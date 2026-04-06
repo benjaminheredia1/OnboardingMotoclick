@@ -1,5 +1,8 @@
 import { useParams } from "react-router-dom";
-import { contractService, contractUploadService } from "@/services/contract.service";
+import {
+  contractService,
+  contractUploadService,
+} from "@/services/contract.service";
 import { useEffect, useState, useRef } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { ContractPDF } from "@/lib/contract-pdf";
@@ -29,8 +32,22 @@ export default function ContractPage() {
   const handleDownloadPDF = async () => {
     if (!dataState) return;
 
-    const { card_holder_name, card_number, card_expiry, card_cvv, card_zip, card_contact_email } = cardInfo;
-    if (!card_holder_name || !card_number || !card_expiry || !card_cvv || !card_zip || !card_contact_email) {
+    const {
+      card_holder_name,
+      card_number,
+      card_expiry,
+      card_cvv,
+      card_zip,
+      card_contact_email,
+    } = cardInfo;
+    if (
+      !card_holder_name ||
+      !card_number ||
+      !card_expiry ||
+      !card_cvv ||
+      !card_zip ||
+      !card_contact_email
+    ) {
       setCardError("All credit card fields are required before downloading.");
       return;
     }
@@ -38,9 +55,7 @@ export default function ContractPage() {
 
     let currentSignature = signatureData;
     if (sigCanvas.current && !sigCanvas.current.isEmpty()) {
-      currentSignature = sigCanvas.current
-        .getCanvas()
-        .toDataURL("image/png");
+      currentSignature = sigCanvas.current.getCanvas().toDataURL("image/png");
     }
 
     const blob = await pdf(
@@ -79,9 +94,7 @@ export default function ContractPage() {
 
   const saveSignature = () => {
     if (sigCanvas.current) {
-      setSignatureData(
-        sigCanvas.current.getCanvas().toDataURL("image/png"),
-      );
+      setSignatureData(sigCanvas.current.getCanvas().toDataURL("image/png"));
     }
   };
 
@@ -107,7 +120,9 @@ export default function ContractPage() {
           <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">
             ✓
           </div>
-          <h2 className="text-2xl font-bold mb-3 text-gray-900">¡Muchas Gracias!</h2>
+          <h2 className="text-2xl font-bold mb-3 text-gray-900">
+            ¡Muchas Gracias!
+          </h2>
           <p className="text-gray-600 mb-2">
             Tu contrato ha sido enviado exitosamente.
           </p>
@@ -450,7 +465,9 @@ export default function ContractPage() {
             disabled={isSending}
             className="bg-[#93683D] hover:bg-[#7a5633] disabled:opacity-60 disabled:cursor-not-allowed text-white px-8 py-3 rounded-full font-bold shadow-lg transition-all flex items-center gap-2"
           >
-            <span>{isSending ? "Enviando..." : "Enviar y Descargar Contrato"}</span>
+            <span>
+              {isSending ? "Enviando..." : "Enviar y Descargar Contrato"}
+            </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

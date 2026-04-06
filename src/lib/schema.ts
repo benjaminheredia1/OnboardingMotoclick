@@ -27,6 +27,15 @@ export const onboardingSchema = z.object({
   city_borough: z.string().min(1, "City / Borough is required").max(100, "Max 100 characters").regex(cleanTextRegex, cleanTextMsg),
   zip_code: z.string().max(20, "Max 20 characters").regex(cleanTextRegex, cleanTextMsg).optional(),
   number_of_locations: z.coerce.number().min(1, "Must be at least 1 location"),
+  avg_orders_per_location: z.coerce
+    .number()
+    .min(0, "Must be a non-negative number")
+    .default(0),
+  location_addresses: z
+    .string()
+    .max(1000, "Max 1000 characters")
+    .regex(cleanTextRegex, cleanTextMsg)
+    .optional(),
   business_type: z.enum([
     "Restaurant",
     "Bakery",
@@ -45,6 +54,7 @@ export const onboardingSchema = z.object({
   own_drivers: z.enum(["Yes", "No", "Partially"]),
   self_delivering: z.enum(["Yes", "No"]),
   using_3pl: z.enum(["Yes", "No"]).optional(),
+  using_3pl_use: z.string().max(100, "Max 100 characters").regex(cleanTextRegex, cleanTextMsg).optional(),
   pain_points: z.string().max(500, "Max 500 characters").regex(cleanTextRegex, cleanTextMsg).optional(),
 
   // Section C
@@ -53,6 +63,8 @@ export const onboardingSchema = z.object({
   middleware_system: z.string().min(1, "Middleware System is required").max(100, "Max 100 characters").regex(cleanTextRegex, cleanTextMsg),
   own_website: z.enum(["Yes", "No"]).optional(),
   own_app: z.enum(["Yes", "No"]).optional(),
+  own_website_url: z.string().min(5).max(100).regex(cleanTextRegex, cleanTextMsg).optional(),
+  own_app_url: z.string().min(5).max(100).regex(cleanTextRegex, cleanTextMsg).optional(),
   
   // Section D
   target_date: z.date(),

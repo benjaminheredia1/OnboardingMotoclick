@@ -39,6 +39,8 @@ export function OnboardingForm() {
       city_borough: "",
       zip_code: "",
       number_of_locations: 1,
+      avg_orders_per_location: 0,
+      location_addresses: "",
       business_type: "Restaurant",
       main_address: "",
       operating_hours: [
@@ -207,11 +209,7 @@ export function OnboardingForm() {
                 </div>
               )}
 
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full h-12 text-lg rounded-full text-white bg-[#FF6200] hover:bg-[#E66E00] disabled:opacity-100 transition-all shadow-lg shadow-[#FF7A00]/30"
-              >
+              <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Submitting..." : "Submit Application"}
               </Button>
             </div>

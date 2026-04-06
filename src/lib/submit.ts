@@ -28,7 +28,7 @@ export async function submitRegistration(data: OnboardingFormValues) {
         finalPlatforms.push(acc.name.trim());
       }
     });
-
+    console.log(data);
     const payload: any = {
       ...data,
       other_platform_name: otherNamesStr,

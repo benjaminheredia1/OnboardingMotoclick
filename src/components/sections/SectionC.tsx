@@ -15,6 +15,8 @@ import type { OnboardingFormValues } from "@/lib/schema";
 
 export function SectionC() {
   const { control } = useFormContext<OnboardingFormValues>();
+  const [appOwn, setAppOwn] = useState(false);
+  const [webOwn, setWebOwn] = useState(false);
 
   const platforms = ["Uber Eats", "DoorDash", "Grubhub", "Other", "None"];
 
@@ -111,7 +113,7 @@ export function SectionC() {
           name="pos_system"
           render={({ field }) => {
             const [selection, setSelection] = useState<string>(
-              field.value === "None" ? "None" : field.value ? "Other" : ""
+              field.value === "None" ? "None" : field.value ? "Other" : "",
             );
 
             return (
@@ -167,7 +169,7 @@ export function SectionC() {
           name="middleware_system"
           render={({ field }) => {
             const [selection, setSelection] = useState<string>(
-              field.value === "None" ? "None" : field.value ? "Other" : ""
+              field.value === "None" ? "None" : field.value ? "Other" : "",
             );
 
             return (
@@ -217,7 +219,6 @@ export function SectionC() {
             );
           }}
         />
-
         <FormField
           control={control}
           name="own_website"
@@ -226,7 +227,10 @@ export function SectionC() {
               <FormLabel>OWN WEBSITE WITH ORDERS?</FormLabel>
               <FormControl>
                 <RadioGroup
-                  onValueChange={field.onChange}
+                  onValueChange={(value) => {
+                    field.onChange(value);
+                    setWebOwn(value === "Yes");
+                  }}
                   value={field.value}
                   className="flex space-x-4"
                 >
@@ -249,6 +253,22 @@ export function SectionC() {
             </FormItem>
           )}
         />
+
+        {webOwn && (
+          <FormField
+            control={control}
+            name="own_website_url"
+            render={({ field }) => (
+              <FormItem className="space-y-3 pt-4 border-t border-dashed">
+                <FormLabel>WEB SISTE</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter website URL..." {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
 
         <FormField
           control={control}
@@ -258,7 +278,10 @@ export function SectionC() {
               <FormLabel>OWN APP?</FormLabel>
               <FormControl>
                 <RadioGroup
-                  onValueChange={field.onChange}
+                  onValueChange={(value) => {
+                    field.onChange(value);
+                    setAppOwn(value === "Yes");
+                  }}
                   value={field.value}
                   className="flex space-x-4"
                 >
@@ -281,6 +304,21 @@ export function SectionC() {
             </FormItem>
           )}
         />
+        {appOwn && (
+          <FormField
+            control={control}
+            name="own_app_url"
+            render={({ field }) => (
+              <FormItem className="space-y-3 pt-4 border-t border-dashed">
+                <FormLabel>APP URL</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter app URL..." {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
       </div>
     </div>
   );

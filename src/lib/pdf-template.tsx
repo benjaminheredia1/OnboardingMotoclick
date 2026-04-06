@@ -18,7 +18,7 @@ const formatOperatingHours = (hours: any[]) => {
           <td style="padding: 4px 8px; border: 1px solid #ddd;">${slot.days?.join(", ") || "N/A"}</td>
           <td style="padding: 4px 8px; border: 1px solid #ddd;">${slot.open || "N/A"}</td>
           <td style="padding: 4px 8px; border: 1px solid #ddd;">${slot.close || "N/A"}</td>
-        </tr>`
+        </tr>`,
     )
     .join("");
 };
@@ -26,7 +26,8 @@ const formatOperatingHours = (hours: any[]) => {
 export const template = (data: MotoclickClientOnboardingForm) => {
   const mutedOrange = "#93683D";
   const h2Style = `font-size: 17px; font-weight: 700; margin-top: 25px; margin-bottom: 12px; color: white; background-color: ${mutedOrange}; padding: 10px 15px; text-transform: uppercase; break-after: avoid; page-break-after: avoid;`;
-  const sectionWrapperStyle = "margin-bottom: 30px; break-inside: avoid; page-break-inside: avoid; width: 100%;";
+  const sectionWrapperStyle =
+    "margin-bottom: 30px; break-inside: avoid; page-break-inside: avoid; width: 100%;";
   const containerStyle =
     "display: flex; flex-wrap: wrap; justify-content: space-between;";
   const fieldHalfStyle =
@@ -51,8 +52,7 @@ export const template = (data: MotoclickClientOnboardingForm) => {
     "width: 47%; margin-bottom: 12px; display: flex; flex-direction: column; break-inside: avoid; page-break-inside: avoid;";
   const credLabelStyle =
     "font-weight: 600; font-size: 11px; color: #888; text-transform: uppercase;";
-  const credValueStyle =
-    "font-size: 14px; color: #333; margin-top: 2px;";
+  const credValueStyle = "font-size: 14px; color: #333; margin-top: 2px;";
 
   const phoneDisplay = `${formatValue(data.phone_prefix)} ${formatValue(data.phone_number)}`;
 
@@ -80,6 +80,8 @@ export const template = (data: MotoclickClientOnboardingForm) => {
                 <div style="${fieldHalfStyle}"><span style="${labelStyle}">Number of Locations</span><span style="${valueStyle}">${formatValue(data.number_of_locations)}</span></div>
                 <div style="${fieldHalfStyle}"><span style="${labelStyle}">Business Type</span><span style="${valueStyle}">${formatValue(data.business_type)}</span></div>
                 <div style="${fieldFullStyle}"><span style="${labelStyle}">Main Address</span><span style="${valueStyle}">${formatValue(data.main_address)}</span></div>
+                <div style="${fieldHalfStyle}"><span style="${labelStyle}">Avg Orders / Day / Branch</span><span style="${valueStyle}">${formatValue(data.avg_orders_per_location)}</span></div>
+                ${data.number_of_locations > 1 ? `<div style="${fieldFullStyle}"><span style="${labelStyle}">Branch Addresses</span><span style="${valueStyle}">${formatValue(data.location_addresses)}</span></div>` : ""}
             </div>
 
             <!-- Operating Hours Table -->
@@ -105,12 +107,11 @@ export const template = (data: MotoclickClientOnboardingForm) => {
             <h2 style="${h2Style}">B. Operational Profile</h2>
             <div style="${containerStyle}">
                 <div style="${fieldHalfStyle}"><span style="${labelStyle}">Average Orders / Day</span><span style="${valueStyle}">${formatValue(data.avg_orders)}</span></div>
-                <div style="${fieldHalfStyle}"><span style="${labelStyle}">Average Ticket ($)</span><span style="${valueStyle}">${formatValue(data.avg_ticket)}</span></div>
                 <div style="${fieldHalfStyle}"><span style="${labelStyle}">Peak Hours</span><span style="${valueStyle}">${formatValue(data.peak_hours)}</span></div>
                 <div style="${fieldHalfStyle}"><span style="${labelStyle}">Own Delivery Drivers?</span><span style="${valueStyle}">${formatValue(data.own_drivers)}</span></div>
                 <div style="${fieldHalfStyle}"><span style="${labelStyle}">Currently Self-Delivering?</span><span style="${valueStyle}">${formatValue(data.self_delivering)}</span></div>
                 <div style="${fieldHalfStyle}"><span style="${labelStyle}">Using 3PL?</span><span style="${valueStyle}">${formatValue(data.using_3pl)}</span></div>
-                <div style="${fieldFullStyle}"><span style="${labelStyle}">Current Pain Points</span><span style="${valueStyle}">${formatValue(data.pain_points)}</span></div>
+                <div style="${fieldHalfStyle}"><span style="${labelStyle}">Which one do you use?</span><span style="${valueStyle}">${formatValue(data.using_3pl_use)}</span></div>
             </div>
         </div>
 
@@ -122,7 +123,9 @@ export const template = (data: MotoclickClientOnboardingForm) => {
                 <div style="${fieldHalfStyle}"><span style="${labelStyle}">POS System</span><span style="${valueStyle}">${formatValue(data.pos_system)}</span></div>
                 <div style="${fieldHalfStyle}"><span style="${labelStyle}">Middleware System</span><span style="${valueStyle}">${formatValue(data.middleware_system)}</span></div>
                 <div style="${fieldHalfStyle}"><span style="${labelStyle}">Own Website?</span><span style="${valueStyle}">${formatValue(data.own_website)}</span></div>
+                <div style="${fieldHalfStyle}"><span style="${labelStyle}">Own Website URL</span><span style="${valueStyle}">${formatValue(data.own_website_url)}</span></div>
                 <div style="${fieldHalfStyle}"><span style="${labelStyle}">Own App?</span><span style="${valueStyle}">${formatValue(data.own_app)}</span></div>
+                <div style="${fieldHalfStyle}"><span style="${labelStyle}">Own App URL</span><span style="${valueStyle}">${formatValue(data.own_app_url)}</span></div>
             </div>
         </div>
 
@@ -174,21 +177,28 @@ export const template = (data: MotoclickClientOnboardingForm) => {
                 
                 ${(data.other_accounts || [])
                   .filter((acc: any) => acc.name || acc.user || acc.pass)
-                  .map((acc: any, idx: number) => `
+                  .map(
+                    (acc: any, idx: number) => `
                     <div style="margin-top: 15px; width: 100%; border-top: 1px dashed #eee; padding-top: 10px; display: flex; flex-wrap: wrap; justify-content: space-between; break-inside: avoid; page-break-inside: avoid;">
                       <div style="${credFieldStyle}"><span style="${credLabelStyle}">Other Platform ${idx + 1}</span><span style="${credValueStyle}">${formatValue(acc.name)}</span></div>
                       <div style="${credFieldStyle}"><span style="${credLabelStyle}">User</span><span style="${credValueStyle}">${formatValue(acc.user)}</span></div>
                       <div style="width: 100%; margin-top: 4px;"><span style="${credLabelStyle}">Pass</span><span style="${credValueStyle}">${formatValue(acc.pass)}</span></div>
                     </div>
-                  `).join("")}
+                  `,
+                  )
+                  .join("")}
 
-                ${(data.other_platform_name && data.other_platform_name.trim()) ? `
+                ${
+                  data.other_platform_name && data.other_platform_name.trim()
+                    ? `
                   <div style="margin-top: 15px; width: 100%; border-top: 1px dashed #eee; padding-top: 10px; display: flex; flex-wrap: wrap; justify-content: space-between; break-inside: avoid; page-break-inside: avoid;">
                     <div style="${credFieldStyle}"><span style="${credLabelStyle}">Other Platform (Sec. C)</span><span style="${credValueStyle}">${formatValue(data.other_platform_name)}</span></div>
                     <div style="${credFieldStyle}"><span style="${credLabelStyle}">User</span><span style="${credValueStyle}">${formatValue(data.other_platform_user)}</span></div>
                     <div style="width: 100%; margin-top: 4px;"><span style="${credLabelStyle}">Pass</span><span style="${credValueStyle}">${formatValue(data.other_platform_pass)}</span></div>
                   </div>
-                ` : ""}
+                `
+                    : ""
+                }
             </div>
         </div>
 
