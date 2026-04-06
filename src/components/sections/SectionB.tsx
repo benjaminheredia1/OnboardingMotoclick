@@ -17,7 +17,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import type { OnboardingFormValues } from "@/lib/schema";
 import { useState } from "react";
 
@@ -35,11 +34,11 @@ export function SectionB() {
 
   return (
     <div className="">
-      <div className="bg-zinc-800 text-white px-4 py-2 uppercase font-semibold text-sm rounded-t-md">
+      <div className="px-4 py-2 text-sm font-semibold text-white uppercase bg-zinc-800 rounded-t-md">
         B. Operational Profile
       </div>
 
-      <div className="p-4 bg-white border border-t-0 rounded-b-md shadow-sm space-y-4">
+      <div className="p-4 space-y-4 bg-white border border-t-0 shadow-sm rounded-b-md">
         <FormField
           control={control}
           name="avg_orders"
@@ -88,7 +87,7 @@ export function SectionB() {
                     <DialogTrigger asChild>
                       <Button
                         variant="outline"
-                        className="w-full justify-start text-left font-normal bg-white h-12"
+                        className="justify-start w-full h-12 font-normal text-left bg-white"
                       >
                         {field.value ? (
                           field.value
@@ -107,7 +106,7 @@ export function SectionB() {
                         {PEAK_HOURS_OPTIONS.map((opt) => (
                           <label
                             key={opt}
-                            className="flex items-center space-x-3 p-3 border rounded-lg cursor-pointer hover:bg-zinc-50"
+                            className="flex items-center p-3 space-x-3 border rounded-lg cursor-pointer hover:bg-zinc-50"
                           >
                             <Checkbox
                               checked={selectedValues.includes(opt)}
@@ -130,7 +129,7 @@ export function SectionB() {
           control={control}
           name="own_drivers"
           render={({ field }) => (
-            <FormItem className="space-y-3 pt-4 border-t border-dashed">
+            <FormItem className="pt-4 space-y-3 border-t border-dashed">
               <FormLabel>
                 OWN DELIVERY DRIVERS? <span className="text-red-500">*</span>
               </FormLabel>
@@ -164,7 +163,7 @@ export function SectionB() {
           control={control}
           name="self_delivering"
           render={({ field }) => (
-            <FormItem className="space-y-3 pt-4 border-t border-dashed">
+            <FormItem className="pt-4 space-y-3 border-t border-dashed">
               <FormLabel>
                 CURRENTLY SELF-DELIVERING?{" "}
                 <span className="text-red-500">*</span>
@@ -199,7 +198,7 @@ export function SectionB() {
           control={control}
           name="using_3pl"
           render={({ field }) => (
-            <FormItem className="space-y-3 pt-4 border-t border-dashed">
+            <FormItem className="pt-4 space-y-3 border-t border-dashed">
               <FormLabel>
                 DO YOU CURRENTLY USE A LOGISTICS COMPANY FOR YOUR DELIVERIES?
               </FormLabel>
@@ -237,7 +236,7 @@ export function SectionB() {
             control={control}
             name="using_3pl_use"
             render={({ field }) => (
-              <FormItem className="space-y-3 pt-4 border-t border-dashed">
+              <FormItem className="pt-4 space-y-3 border-t border-dashed">
                 <FormLabel>WHICH ONE DO YOU USE?</FormLabel>
                 <FormControl>
                   <Input
