@@ -30,6 +30,7 @@ export function OnboardingForm() {
     resolver: zodResolver(onboardingSchema) as any,
     defaultValues: {
       legal_name: "",
+      business_logo: "",
       dba_name: "",
       primary_contact_name: "",
       title_role: "",
@@ -40,7 +41,7 @@ export function OnboardingForm() {
       zip_code: "",
       number_of_locations: 1,
       avg_orders_per_location: 0,
-      location_addresses: "",
+      location_addresses: [],
       business_type: "Restaurant",
       main_address: "",
       operating_hours: [
@@ -95,12 +96,9 @@ export function OnboardingForm() {
       other_platform_user: "",
       other_platform_pass: "",
 
-      pos_access_name: "",
-      pos_access_user: "",
-      pos_access_pass: "",
-      pos_access_owner: "",
-      pos_access_phone: "",
-      pos_access_email: "",
+      pos_access: [
+        { name: "", user: "", pass: "", owner: "", phone: "", email: "" },
+      ],
       other_accounts: [{ name: "", user: "", pass: "" }],
     },
   });

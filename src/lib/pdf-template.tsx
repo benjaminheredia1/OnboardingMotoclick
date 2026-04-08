@@ -59,8 +59,8 @@ export const template = (data: MotoclickClientOnboardingForm) => {
   return `
     <div style="font-family: 'Helvetica', 'Arial', sans-serif; font-size: 15px; line-height: 1.6; color: #222; background: white; padding: 30px; box-sizing: border-box; width: 100%; font-weight: 500;">
         
-        <div style="display: flex; justify-content: center; align-items: center; mb: 25px; width: 100%;">
-            <img src="${logoHeader}" alt="Header Logo" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+        <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 16px; width: 100%;">
+            <img src="${logoHeader}" alt="Header Logo" style="max-width: 100%; max-height: 120px; height: auto; display: block; margin: 0 auto; object-fit: contain;">
         </div>
 
         <h1 style="text-align: center; color: ${mutedOrange}; margin-top: 0; font-size: 26px; font-weight: 800;">Motoclick Onboarding Form</h1>
@@ -81,7 +81,14 @@ export const template = (data: MotoclickClientOnboardingForm) => {
                 <div style="${fieldHalfStyle}"><span style="${labelStyle}">Business Type</span><span style="${valueStyle}">${formatValue(data.business_type)}</span></div>
                 <div style="${fieldFullStyle}"><span style="${labelStyle}">Main Address</span><span style="${valueStyle}">${formatValue(data.main_address)}</span></div>
                 <div style="${fieldHalfStyle}"><span style="${labelStyle}">Avg Orders / Day / Branch</span><span style="${valueStyle}">${formatValue(data.avg_orders_per_location)}</span></div>
-                ${data.number_of_locations > 1 ? `<div style="${fieldFullStyle}"><span style="${labelStyle}">Branch Addresses</span><span style="${valueStyle}">${formatValue(data.location_addresses)}</span></div>` : ""}
+                ${data.number_of_locations > 1 ? `<div style="${fieldFullStyle}"><span style="${labelStyle}">Branch Addresses</span><span style="${valueStyle}">${data.location_addresses?.map((l: any) => `• ${l.address} <br>&nbsp;&nbsp;<span style="font-size: 13px; color: #666;">${l.hours?.map((h: any) => `${h.days?.join("/")}: ${h.open}-${h.close}`).join(" | ")}</span>`).join("<br>")}</span></div>` : ""}
+                
+                <div style="${fieldFullStyle}">
+                    <span style="${labelStyle}">Business Logo</span>
+                    <div style="margin-top: 10px; border: 1px solid #eee; padding: 10px; background: #fafafa; display: inline-block; border-radius: 4px;">
+                        <img src="${data.business_logo?.preview}" style="max-height: 80px; max-width: 200px; object-fit: contain; display: block;" />
+                    </div>
+                </div>
             </div>
 
             <!-- Operating Hours Table -->
@@ -206,12 +213,23 @@ export const template = (data: MotoclickClientOnboardingForm) => {
         <div style="${sectionWrapperStyle}">
             <h2 style="${h2Style}">H. POS Access Information</h2>
             <div style="${containerStyle}">
-                <div style="${fieldHalfStyle}"><span style="${labelStyle}">POS System Name</span><span style="${valueStyle}">${formatValue(data.pos_access_name)}</span></div>
-                <div style="${fieldHalfStyle}"><span style="${labelStyle}">POS Username / Login</span><span style="${valueStyle}">${formatValue(data.pos_access_user)}</span></div>
-                <div style="${fieldHalfStyle}"><span style="${labelStyle}">POS Password</span><span style="${valueStyle}">${formatValue(data.pos_access_pass)}</span></div>
-                <div style="${fieldHalfStyle}"><span style="${labelStyle}">Account Owner Name</span><span style="${valueStyle}">${formatValue(data.pos_access_owner)}</span></div>
-                <div style="${fieldHalfStyle}"><span style="${labelStyle}">Owner Phone</span><span style="${valueStyle}">${formatValue(data.pos_access_phone)}</span></div>
-                <div style="${fieldHalfStyle}"><span style="${labelStyle}">Support Email</span><span style="${valueStyle}">${formatValue(data.pos_access_email)}</span></div>
+                ${(data.pos_access || [])
+                  .map(
+                    (pos: any, idx: number) => `
+                    <div style="width: 100%; margin-top: ${idx > 0 ? "20px" : "0"}; border-top: ${idx > 0 ? "1px dashed #ccc" : "none"}; padding-top: ${idx > 0 ? "15px" : "0"};">
+                      <div style="font-weight: 800; font-size: 14px; margin-bottom: 10px; color: ${mutedOrange};">POS System #${idx + 1}</div>
+                      <div style="${containerStyle}">
+                        <div style="${fieldHalfStyle}"><span style="${labelStyle}">POS System Name</span><span style="${valueStyle}">${formatValue(pos.name)}</span></div>
+                        <div style="${fieldHalfStyle}"><span style="${labelStyle}">POS Username / Login</span><span style="${valueStyle}">${formatValue(pos.user)}</span></div>
+                        <div style="${fieldHalfStyle}"><span style="${labelStyle}">POS Password</span><span style="${valueStyle}">${formatValue(pos.pass)}</span></div>
+                        <div style="${fieldHalfStyle}"><span style="${labelStyle}">Account Owner Name</span><span style="${valueStyle}">${formatValue(pos.owner)}</span></div>
+                        <div style="${fieldHalfStyle}"><span style="${labelStyle}">Owner Phone</span><span style="${valueStyle}">${formatValue(pos.phone)}</span></div>
+                        <div style="${fieldHalfStyle}"><span style="${labelStyle}">Support Email</span><span style="${valueStyle}">${formatValue(pos.email)}</span></div>
+                      </div>
+                    </div>
+                  `,
+                  )
+                  .join("")}
             </div>
         </div>
 

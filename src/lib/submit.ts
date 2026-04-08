@@ -28,18 +28,40 @@ export async function submitRegistration(data: OnboardingFormValues) {
         finalPlatforms.push(acc.name.trim());
       }
     });
-    console.log(data);
+    const formatHoursStr = (hours: any[]) => {
+      if (!hours || hours.length === 0) return "N/A";
+      return hours.map(h => `${h.days?.join("/") || "N/A"} ${h.open}-${h.close}`).join(" | ");
+    }
+
+    const firstPos = data.pos_access?.[0] || {};
+    const businessLogo = data.business_logo;
     const payload: any = {
       ...data,
+      business_logo: businessLogo?.preview || "",
       other_platform_name: otherNamesStr,
       other_platform_user: otherUsersStr,
       other_platform_pass: otherPassesStr,
       delivery_platforms: finalPlatforms,
+      location_addresses: data.location_addresses?.map((la: any) => 
+        `${la.address} [Hours: ${formatHoursStr(la.hours)}]`
+      ).join(", "),
       target_date: data.target_date ? new Date(data.target_date).toISOString().split('T')[0] : null,
-      operating_hours: JSON.stringify(data.operating_hours) 
+      operating_hours: JSON.stringify(data.operating_hours),
+      pos_access: JSON.stringify(data.pos_access),
+      // Backward compatibility for the first POS
+      pos_access_name: firstPos.name || "",
+      pos_access_user: firstPos.user || "",
+      pos_access_pass: firstPos.pass || "",
+      pos_access_owner: firstPos.owner || "",
+      pos_access_phone: firstPos.phone || "",
+      pos_access_email: firstPos.email || "",
     }
 
     const submitData = new FormData()
+
+    if (businessLogo?.file) {
+      submitData.append('business_logo_file', businessLogo.file, businessLogo.file.name);
+    }
 
     for (const key in payload) {
       if (Array.isArray(payload[key])) {

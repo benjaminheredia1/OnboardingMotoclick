@@ -61,7 +61,9 @@ export function SectionD() {
                     mode="single"
                     selected={field.value}
                     onSelect={field.onChange}
-                    disabled={(date: Date) => date < new Date("1900-01-01")}
+                    disabled={(date: Date) =>
+                      date < new Date(new Date().setHours(0, 0, 0, 0))
+                    }
                     initialFocus
                   />
                 </PopoverContent>

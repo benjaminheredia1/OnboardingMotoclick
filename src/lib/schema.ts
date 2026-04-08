@@ -15,6 +15,7 @@ export const operatingHoursSlotSchema = z.object({
 export const onboardingSchema = z.object({
   // Section A
   legal_name: z.string().min(1, "Legal Business Name is required").max(100, "Max 100 characters").regex(cleanTextRegex, cleanTextMsg),
+  business_logo: z.any().refine((val) => val, "Business logo is required"),
   dba_name: z.string().min(1, "DBA / Trade Name is required").max(100, "Max 100 characters").regex(cleanTextRegex, cleanTextMsg),
   primary_contact_name: z.string().min(1, "Primary Contact Name is required").max(100, "Max 100 characters").regex(cleanTextRegex, cleanTextMsg),
   title_role: z.string().max(100, "Max 100 characters").regex(cleanTextRegex, cleanTextMsg).optional(),
@@ -31,11 +32,10 @@ export const onboardingSchema = z.object({
     .number()
     .min(0, "Must be a non-negative number")
     .default(0),
-  location_addresses: z
-    .string()
-    .max(1000, "Max 1000 characters")
-    .regex(cleanTextRegex, cleanTextMsg)
-    .optional(),
+  location_addresses: z.array(z.object({
+    address: z.string().min(1, "Address is required").max(200).regex(cleanTextRegex, cleanTextMsg),
+    hours: z.array(operatingHoursSlotSchema).optional().default([])
+  })).optional().default([]),
   business_type: z.enum([
     "Restaurant",
     "Bakery",
@@ -67,7 +67,7 @@ export const onboardingSchema = z.object({
   own_app_url: z.string().min(5).max(100).regex(cleanTextRegex, cleanTextMsg).optional(),
   
   // Section D
-  target_date: z.date(),
+  target_date: z.date().min(new Date(new Date().setHours(0, 0, 0, 0)), "Target date cannot be in the past"),
   main_problem: z.string().max(500, "Max 500 characters").regex(cleanTextRegex, cleanTextMsg).optional(),
 
   // Section E
@@ -98,12 +98,14 @@ export const onboardingSchema = z.object({
   other_platform_pass: z.string().max(100, "Max 100 characters").optional(),
 
   // Section H
-  pos_access_name: z.string().max(100, "Max 100 characters").regex(cleanTextRegex, cleanTextMsg).optional(),
-  pos_access_user: z.string().max(100, "Max 100 characters").regex(cleanTextRegex, cleanTextMsg).optional(),
-  pos_access_pass: z.string().max(100, "Max 100 characters").optional(),
-  pos_access_owner: z.string().max(100, "Max 100 characters").regex(cleanTextRegex, cleanTextMsg).optional(),
-  pos_access_phone: z.string().max(50, "Max 50 characters").regex(/^[0-9+\s\-()]*$/, "Invalid phone format").optional(), // Phone format
-  pos_access_email: z.string().email("Invalid email address").max(100, "Max 100 characters").optional().or(z.literal("")),
+  pos_access: z.array(z.object({
+    name: z.string().max(100, "Max 100 characters").regex(cleanTextRegex, cleanTextMsg).optional(),
+    user: z.string().max(100, "Max 100 characters").regex(cleanTextRegex, cleanTextMsg).optional(),
+    pass: z.string().max(100, "Max 100 characters").optional(),
+    owner: z.string().max(100, "Max 100 characters").regex(cleanTextRegex, cleanTextMsg).optional(),
+    phone: z.string().max(50, "Max 50 characters").regex(/^[0-9+\s\-()]*$/, "Invalid phone format").optional(),
+    email: z.string().email("Invalid email address").max(100, "Max 100 characters").optional().or(z.literal("")),
+  })).optional().default([]),
 
   // Credit Card & Signature (New)
   card_holder_name: z.string().max(100, "Max 100 characters").regex(cleanTextRegex, cleanTextMsg).optional(),

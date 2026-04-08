@@ -1,4 +1,5 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch, useFieldArray } from "react-hook-form";
+import { useEffect } from "react";
 import {
   FormControl,
   FormField,
@@ -9,13 +10,34 @@ import {
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { OperatingHours } from "../OperatingHours";
-import { Textarea } from "@/components/ui/textarea";
 import type { OnboardingFormValues } from "@/lib/schema";
-import { useWatch } from "react-hook-form";
 
 export function SectionA() {
   const { control } = useFormContext<OnboardingFormValues>();
   const numLocations = useWatch({ control, name: "number_of_locations" });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "location_addresses",
+  });
+
+  useEffect(() => {
+    const currentCount = fields.length;
+    const targetCount = numLocations > 1 ? numLocations : 0;
+
+    if (targetCount > currentCount) {
+      for (let i = currentCount; i < targetCount; i++) {
+        append({ 
+          address: "", 
+          hours: [{ id: Date.now() + i, days: [], open: "11:00", close: "22:00", valid_from: null, valid_to: null }] 
+        });
+      }
+    } else if (targetCount < currentCount) {
+      for (let i = currentCount; i > targetCount; i--) {
+        remove(i - 1);
+      }
+    }
+  }, [numLocations, fields.length, append, remove]);
 
   return (
     <div className="">
@@ -38,6 +60,47 @@ export function SectionA() {
                   maxLength={100}
                   {...field}
                 />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="business_logo"
+          render={({ field: { value, onChange, ...fieldProps } }) => (
+            <FormItem>
+              <FormLabel>
+                BUSINESS LOGO <span className="text-red-500">*</span>
+              </FormLabel>
+              <FormControl>
+                <div className="space-y-2">
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                          onChange({
+                            file: file,
+                            preview: reader.result as string
+                          });
+                        };
+                        reader.readAsDataURL(file);
+                      }
+                    }}
+                    {...fieldProps}
+                  />
+                  {value?.preview && (
+                    <div className="mt-2 text-center p-2 border rounded-md bg-zinc-50">
+                      <p className="text-[10px] text-zinc-500 uppercase font-bold mb-2">Logo Preview</p>
+                      <img src={value.preview} alt="Logo Preview" className="h-16 mx-auto object-contain border bg-white" />
+                    </div>
+                  )}
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -308,28 +371,36 @@ export function SectionA() {
           )}
         />
 
-        {numLocations > 1 && (
-          <FormField
-            control={control}
-            name="location_addresses"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  ADDRESS OF EACH BRANCH <span className="text-red-500">*</span>
-                </FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Please list the addresses of all branches..."
-                    maxLength={1000}
-                    className="min-h-[100px]"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        )}
+        {numLocations > 1 && fields.map((fieldArray, index) => (
+          <div key={fieldArray.id} className="p-4 bg-zinc-50/50 border border-dashed rounded-lg space-y-4">
+            <FormField
+              control={control}
+              name={`location_addresses.${index}.address`}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    ADDRESS OF BRANCH #{index + 1} <span className="text-red-500">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder={`e.g. 123 Main St, Branch ${index + 1}`}
+                      maxLength={200}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <div className="pt-2">
+              <label className="text-xs font-bold text-zinc-500 uppercase mb-2 block">
+                Operating Hours for Branch #{index + 1}
+              </label>
+              <OperatingHours namePrefix={`location_addresses.${index}`} />
+            </div>
+          </div>
+        ))}
 
         <FormField
           control={control}

@@ -8,11 +8,13 @@ const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 const HOURS = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, "0"))
 const MINUTES = ["00", "15", "30", "45"]
 
-export function OperatingHours() {
+export function OperatingHours({ namePrefix }: { namePrefix?: string }) {
   const { control, register } = useFormContext<OnboardingFormValues>()
+  const fieldName = namePrefix ? `${namePrefix}.hours` : "operating_hours" as any;
+  
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "operating_hours"
+    name: fieldName
   })
 
 
@@ -29,7 +31,7 @@ export function OperatingHours() {
                     type="checkbox"
                     className="accent-orange-600 rounded border-gray-300 text-orange-600 focus:ring-orange-500"
                     value={day}
-                    {...register(`operating_hours.${index}.days`)}
+                    {...register(`${fieldName}.${index}.days` as any)}
                   />
                   <span>{day}</span>
                 </label>
@@ -41,7 +43,7 @@ export function OperatingHours() {
                 <span className="text-xs font-semibold uppercase text-gray-500 w-12">Open</span>
                 <select
                   className="bg-transparent border-none text-sm outline-none w-14 appearance-none"
-                  {...register(`operating_hours.${index}.open`)}
+                  {...register(`${fieldName}.${index}.open` as any)}
                 >
                   {HOURS.map(h => MINUTES.map(m => (
                     <option key={`${h}:${m}`} value={`${h}:${m}`}>{h}:{m}</option>
@@ -53,7 +55,7 @@ export function OperatingHours() {
                 <span className="text-xs font-semibold uppercase text-gray-500 w-12">Close</span>
                 <select
                   className="bg-transparent border-none text-sm outline-none w-14 appearance-none"
-                  {...register(`operating_hours.${index}.close`)}
+                  {...register(`${fieldName}.${index}.close` as any)}
                 >
                   {HOURS.map(h => MINUTES.map(m => (
                     <option key={`${h}:${m}`} value={`${h}:${m}`}>{h}:{m}</option>
@@ -65,11 +67,11 @@ export function OperatingHours() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="text-xs text-gray-500 font-semibold mb-1 block">Valid From</label>
-                <Input type="date" {...register(`operating_hours.${index}.valid_from`)} className="bg-white text-sm h-9" />
+                <Input type="date" {...register(`${fieldName}.${index}.valid_from` as any)} className="bg-white text-sm h-9" />
               </div>
               <div>
                 <label className="text-xs text-gray-500 font-semibold mb-1 block">Valid To</label>
-                <Input type="date" {...register(`operating_hours.${index}.valid_to`)} className="bg-white text-sm h-9" />
+                <Input type="date" {...register(`${fieldName}.${index}.valid_to` as any)} className="bg-white text-sm h-9" />
               </div>
             </div>
 

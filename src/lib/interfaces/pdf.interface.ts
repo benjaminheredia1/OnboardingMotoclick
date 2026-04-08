@@ -1,6 +1,7 @@
 export interface MotoclickClientOnboardingForm {
   // Section A
   legal_name: string;
+  business_logo: { file: File, preview: string };
   dba_name: string;
   primary_contact_name: string;
   title_role?: string;
@@ -13,7 +14,7 @@ export interface MotoclickClientOnboardingForm {
   business_type: string;
   main_address: string;
   avg_orders_per_location: number;
-  location_addresses?: string;
+  location_addresses?: { address: string }[];
   operating_hours: any[];
 
   // Section B
@@ -67,11 +68,13 @@ export interface MotoclickClientOnboardingForm {
   other_platform_pass?: string;
 
   // Section H
-  pos_access_name?: string;
-  pos_access_user?: string;
-  pos_access_pass?: string;
-  pos_access_owner?: string;
-  pos_access_phone?: string;
-  pos_access_email?: string;
+  pos_access?: {
+    name?: string;
+    user?: string;
+    pass?: string;
+    owner?: string;
+    phone?: string;
+    email?: string;
+  }[];
   other_accounts?: any[];
 }
