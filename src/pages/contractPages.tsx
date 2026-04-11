@@ -143,263 +143,280 @@ export default function ContractPage() {
   }
 
   const merchantName = dataState.merchant_name || "___________________________";
-  const merchantAddress =
-    dataState.main_address || "___________________________";
+  const merchantAddress = dataState.main_address || "___________________________";
 
   return (
     <div className="relative flex justify-center w-full min-h-screen p-4 overflow-y-auto bg-gray-100/30 md:p-8">
       {/* Paper Document Container */}
       <div className="relative z-10 w-full max-w-4xl bg-white shadow-2xl rounded-sm p-8 md:p-16 text-gray-800 font-serif leading-relaxed text-sm md:text-base border-t-8 border-[#93683D]">
-        <header className="pb-8 mb-12 border-b">
-          <h1 className="mb-2 text-2xl font-bold tracking-tight text-center text-gray-900 uppercase md:text-3xl">
-            COMMERCIAL LOGISTICS & DELIVERY SERVICES AGREEMENT
-          </h1>
-          <p className="text-sm italic text-center text-gray-400">
-            This Commercial Logistics & Delivery Services Agreement
-            (“Agreement”) is entered into as of the Effective Date executed via
-            DocuSign...
-          </p>
-        </header>
 
-        <section className="mb-10 space-y-4">
-          <p>This Agreement is by and between:</p>
-          <div className="py-2 pl-4 space-y-4 border-l-4 border-gray-100">
-            <p>
-              <strong>Patio Delivery Inc.</strong>, a Delaware corporation,
-              doing business as <strong>Motoclick</strong> (“Company”), with its
-              principal place of business at 309 Baldwin Avenue, Jersey City, NJ
-              07306.
-            </p>
-            <p className="flex flex-col gap-2 sm:flex-row sm:items-baseline">
-              <strong>And:</strong>
-              <span className="border-b border-gray-400 px-2 min-w-[200px] font-bold text-[#93683D]">
-                {merchantName}
-              </span>
-            </p>
-            <p className="flex flex-col gap-2 sm:flex-row sm:items-baseline">
-              <strong>With principal place of business at:</strong>
-              <span className="border-b border-gray-400 px-2 min-w-[200px] font-bold text-[#93683D]">
-                {merchantAddress}
-              </span>
-            </p>
-          </div>
-          <p className="mt-4 text-sm italic text-gray-500">
-            Company and Merchant may be referred to individually as a “Party”
-            and collectively as the “Parties.”
-          </p>
-        </section>
+        {/* ── CONTRACT BODY: custom HTML if saved, otherwise default ── */}
+        {dataState.html ? (
+          /* Custom HTML saved from the editor */
+          <div
+            className="mb-12"
+            dangerouslySetInnerHTML={{ __html: dataState.html }}
+            style={{
+              fontFamily: "'Helvetica', 'Arial', sans-serif",
+              fontSize: "13px",
+              lineHeight: "1.65",
+              color: "#222",
+            }}
+          />
+        ) : (
+          /* Default hardcoded contract layout */
+          <>
+            <header className="pb-8 mb-12 border-b">
+              <h1 className="mb-2 text-2xl font-bold tracking-tight text-center text-gray-900 uppercase md:text-3xl">
+                COMMERCIAL LOGISTICS &amp; DELIVERY SERVICES AGREEMENT
+              </h1>
+              <p className="text-sm italic text-center text-gray-400">
+                This Commercial Logistics &amp; Delivery Services Agreement
+                ("Agreement") is entered into as of the Effective Date executed via
+                DocuSign...
+              </p>
+            </header>
 
-        <div className="space-y-8">
-          {/* Section 1 */}
-          <div>
-            <h2 className="text-lg font-bold uppercase border-b mb-4 text-[#93683D]">
-              1. RELATIONSHIP OF THE PARTIES
-            </h2>
-            <div className="space-y-4">
-              <div>
-                <h3 className="mb-1 font-bold underline">
-                  1.1 Independent Contractors
-                </h3>
+            <section className="mb-10 space-y-4">
+              <p>This Agreement is by and between:</p>
+              <div className="py-2 pl-4 space-y-4 border-l-4 border-gray-100">
                 <p>
-                  The Parties are independent contractors. Nothing in this
-                  Agreement creates employment, partnership, joint venture,
-                  franchise, agency, or fiduciary relationship.
+                  <strong>Patio Delivery Inc.</strong>, a Delaware corporation,
+                  doing business as <strong>Motoclick</strong> ("Company"), with its
+                  principal place of business at 309 Baldwin Avenue, Jersey City, NJ
+                  07306.
+                </p>
+                <p className="flex flex-col gap-2 sm:flex-row sm:items-baseline">
+                  <strong>And:</strong>
+                  <span className="border-b border-gray-400 px-2 min-w-[200px] font-bold text-[#93683D]">
+                    {merchantName}
+                  </span>
+                </p>
+                <p className="flex flex-col gap-2 sm:flex-row sm:items-baseline">
+                  <strong>With principal place of business at:</strong>
+                  <span className="border-b border-gray-400 px-2 min-w-[200px] font-bold text-[#93683D]">
+                    {merchantAddress}
+                  </span>
                 </p>
               </div>
+              <p className="mt-4 text-sm italic text-gray-500">
+                Company and Merchant may be referred to individually as a "Party"
+                and collectively as the "Parties."
+              </p>
+            </section>
+
+            <div className="space-y-8">
+              {/* Section 1 */}
               <div>
-                <h3 className="mb-1 font-bold underline">
-                  1.2 Operational Control
-                </h3>
+                <h2 className="text-lg font-bold uppercase border-b mb-4 text-[#93683D]">
+                  1. RELATIONSHIP OF THE PARTIES
+                </h2>
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="mb-1 font-bold underline">
+                      1.1 Independent Contractors
+                    </h3>
+                    <p>
+                      The Parties are independent contractors. Nothing in this
+                      Agreement creates employment, partnership, joint venture,
+                      franchise, agency, or fiduciary relationship.
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="mb-1 font-bold underline">
+                      1.2 Operational Control
+                    </h3>
+                    <p>
+                      Company retains exclusive control over dispatch systems,
+                      routing methodology, driver engagement structure, technology
+                      platform, service coverage areas, and operational policies.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Section 2 */}
+              <div>
+                <h2 className="text-lg font-bold uppercase border-b mb-4 text-[#93683D]">
+                  2. SERVICES
+                </h2>
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="mb-1 font-bold underline">2.1 Scope</h3>
+                    <p>
+                      Company provides technology-enabled logistics coordination and
+                      courier facilitation services for delivery of Merchant's
+                      prepared products to end customers. Company does not prepare
+                      food or control food safety.
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="mb-1 font-bold underline">2.2 Service Area</h3>
+                    <p>
+                      Standard delivery radius is up to three (3) miles unless
+                      otherwise agreed in writing.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Section 3 */}
+              <div>
+                <h2 className="text-lg font-bold uppercase border-b mb-4 text-[#93683D]">
+                  3. ECONOMIC TERMS
+                </h2>
+                <div className="space-y-2">
+                  <p>
+                    <strong>3.1 Delivery Fees:</strong> $6.10 flat rate per delivery
+                    (up to 2 miles) + tip; $8.55 flat rate (between 2 and 3 miles) +
+                    tip.
+                  </p>
+                  <p>
+                    <strong>3.2 Late Night Surcharge:</strong> Orders after 12:00 AM
+                    incur a $1.50 surcharge.
+                  </p>
+                  <p>
+                    <strong>3.3 Weekly Invoicing &amp; Automatic Debit:</strong> Company
+                    shall issue weekly electronic invoices. Automatic debit will be
+                    made from the authorized credit card or bank account.
+                  </p>
+                </div>
+              </div>
+
+              {/* Section 4 & 5 */}
+              <div className="p-6 text-sm rounded-md bg-gray-50">
+                <h2 className="mb-2 font-bold uppercase text-md">
+                  Operational Targets &amp; Termination
+                </h2>
                 <p>
-                  Company retains exclusive control over dispatch systems,
-                  routing methodology, driver engagement structure, technology
-                  platform, service coverage areas, and operational policies.
+                  <strong>Targets:</strong> Under 2 miles: 30-min; 2–3 miles: 40-min
+                  (Operational targets only, non-guaranteed).
+                </p>
+                <p className="mt-2 text-xs italic">
+                  Either Party may terminate this Agreement without cause upon
+                  fourteen (14) days' written notice.
+                </p>
+              </div>
+
+              {/* Section 7 */}
+              <div>
+                <h2 className="text-lg font-bold uppercase border-b mb-4 text-[#93683D]">
+                  7. LIABILITY &amp; DRIVER ERROR
+                </h2>
+                <p className="mb-4">
+                  Company shall provide a credit (up to $75 per incident) if an
+                  order is physically damaged or not completed due solely to
+                  verified driver error.
+                </p>
+                <p className="font-sans text-xs italic text-gray-500 uppercase">
+                  **Merchant must submit written notice of any claim within
+                  forty-eight (48) hours of the delivery event.**
                 </p>
               </div>
             </div>
-          </div>
+          </>
+        )}
 
-          {/* Section 2 */}
-          <div>
-            <h2 className="text-lg font-bold uppercase border-b mb-4 text-[#93683D]">
-              2. SERVICES
-            </h2>
-            <div className="space-y-4">
-              <div>
-                <h3 className="mb-1 font-bold underline">2.1 Scope</h3>
-                <p>
-                  Company provides technology-enabled logistics coordination and
-                  courier facilitation services for delivery of Merchant’s
-                  prepared products to end customers. Company does not prepare
-                  food or control food safety.
-                </p>
-              </div>
-              <div>
-                <h3 className="mb-1 font-bold underline">2.2 Service Area</h3>
-                <p>
-                  Standard delivery radius is up to three (3) miles unless
-                  otherwise agreed in writing.
-                </p>
-              </div>
+        {/* ── CREDIT CARD AUTHORIZATION (always shown) ── */}
+        <div className="p-6 mt-12 border-2 border-gray-200 border-dashed rounded-lg bg-zinc-50/50">
+          <h3 className="mb-6 font-bold tracking-widest text-center text-gray-800 uppercase border-b pb-2">
+            CREDIT CARD AUTHORIZATION
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-sm">
+            <div className="flex flex-col gap-1">
+              <label className="font-bold text-xs text-gray-500 uppercase">
+                Nombre del titular de la tarjeta
+              </label>
+              <input
+                type="text"
+                className="border-b border-gray-300 focus:border-[#93683D] outline-none bg-transparent py-1 transition-colors"
+                value={cardInfo.card_holder_name}
+                onChange={(e) =>
+                  setCardInfo({
+                    ...cardInfo,
+                    card_holder_name: e.target.value,
+                  })
+                }
+                placeholder="Full Name"
+              />
             </div>
-          </div>
-
-          {/* Section 3 */}
-          <div>
-            <h2 className="text-lg font-bold uppercase border-b mb-4 text-[#93683D]">
-              3. ECONOMIC TERMS
-            </h2>
-            <div className="space-y-2">
-              <p>
-                <strong>3.1 Delivery Fees:</strong> $6.10 flat rate per delivery
-                (up to 2 miles) + tip; $8.55 flat rate (between 2 and 3 miles) +
-                tip.
-              </p>
-              <p>
-                <strong>3.2 Late Night Surcharge:</strong> Orders after 12:00 AM
-                incur a $1.50 surcharge.
-              </p>
-              <p>
-                <strong>3.3 Weekly Invoicing & Automatic Debit:</strong> Company
-                shall issue weekly electronic invoices. Automatic debit will be
-                made from the authorized credit card or bank account.
-              </p>
+            <div className="flex flex-col gap-1">
+              <label className="font-bold text-xs text-gray-500 uppercase">
+                Número de tarjeta
+              </label>
+              <input
+                type="text"
+                className="border-b border-gray-300 focus:border-[#93683D] outline-none bg-transparent py-1 transition-colors"
+                value={cardInfo.card_number}
+                onChange={(e) =>
+                  setCardInfo({ ...cardInfo, card_number: e.target.value })
+                }
+                placeholder="0000 0000 0000 0000"
+              />
             </div>
-          </div>
-
-          {/* Section 4 & 5 simplified for brevity in UI but showing key terms */}
-          <div className="p-6 text-sm rounded-md bg-gray-50">
-            <h2 className="mb-2 font-bold uppercase text-md">
-              Operational Targets & Termination
-            </h2>
-            <p>
-              <strong>Targets:</strong> Under 2 miles: 30-min; 2–3 miles: 40-min
-              (Operational targets only, non-guaranteed).
-            </p>
-            <p className="mt-2 text-xs italic">
-              Either Party may terminate this Agreement without cause upon
-              fourteen (14) days’ written notice.
-            </p>
-          </div>
-
-          {/* Section 7 - Liability (The important part for merchants) */}
-          <div>
-            <h2 className="text-lg font-bold uppercase border-b mb-4 text-[#93683D]">
-              7. LIABILITY & DRIVER ERROR
-            </h2>
-            <p className="mb-4">
-              Company shall provide a credit (up to $75 per incident) if an
-              order is physically damaged or not completed due solely to
-              verified driver error.
-            </p>
-            <p className="font-sans text-xs italic text-gray-500 uppercase">
-              **Merchant must submit written notice of any claim within
-              forty-eight (48) hours of the delivery event.**
-            </p>
-          </div>
-
-          {/* Exhibit A Highlight */}
-          {/* Credit Card Authorization */}
-          <div className="p-6 mt-12 border-2 border-gray-200 border-dashed rounded-lg bg-zinc-50/50">
-            <h3 className="mb-6 font-bold tracking-widest text-center text-gray-800 uppercase border-b pb-2">
-              CREDIT CARD AUTHORIZATION
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-sm">
-              <div className="flex flex-col gap-1">
-                <label className="font-bold text-xs text-gray-500 uppercase">
-                  Nombre del titular de la tarjeta
-                </label>
-                <input
-                  type="text"
-                  className="border-b border-gray-300 focus:border-[#93683D] outline-none bg-transparent py-1 transition-colors"
-                  value={cardInfo.card_holder_name}
-                  onChange={(e) =>
-                    setCardInfo({
-                      ...cardInfo,
-                      card_holder_name: e.target.value,
-                    })
-                  }
-                  placeholder="Full Name"
-                />
-              </div>
-              <div className="flex flex-col gap-1">
-                <label className="font-bold text-xs text-gray-500 uppercase">
-                  Número de tarjeta
-                </label>
-                <input
-                  type="text"
-                  className="border-b border-gray-300 focus:border-[#93683D] outline-none bg-transparent py-1 transition-colors"
-                  value={cardInfo.card_number}
-                  onChange={(e) =>
-                    setCardInfo({ ...cardInfo, card_number: e.target.value })
-                  }
-                  placeholder="0000 0000 0000 0000"
-                />
-              </div>
-              <div className="flex flex-col gap-1">
-                <label className="font-bold text-xs text-gray-500 uppercase">
-                  Fecha de vencimiento (MM/AA)
-                </label>
-                <input
-                  type="text"
-                  className="border-b border-gray-300 focus:border-[#93683D] outline-none bg-transparent py-1 transition-colors"
-                  value={cardInfo.card_expiry}
-                  onChange={(e) =>
-                    setCardInfo({ ...cardInfo, card_expiry: e.target.value })
-                  }
-                  placeholder="MM/YY"
-                />
-              </div>
-              <div className="flex flex-col gap-1">
-                <label className="font-bold text-xs text-gray-500 uppercase">
-                  CVV
-                </label>
-                <input
-                  type="text"
-                  className="border-b border-gray-300 focus:border-[#93683D] outline-none bg-transparent py-1 transition-colors"
-                  value={cardInfo.card_cvv}
-                  onChange={(e) =>
-                    setCardInfo({ ...cardInfo, card_cvv: e.target.value })
-                  }
-                  placeholder="123"
-                />
-              </div>
-              <div className="flex flex-col gap-1">
-                <label className="font-bold text-xs text-gray-500 uppercase">
-                  ZIP Code
-                </label>
-                <input
-                  type="text"
-                  className="border-b border-gray-300 focus:border-[#93683D] outline-none bg-transparent py-1 transition-colors"
-                  value={cardInfo.card_zip}
-                  onChange={(e) =>
-                    setCardInfo({ ...cardInfo, card_zip: e.target.value })
-                  }
-                  placeholder="00000"
-                />
-              </div>
-              <div className="flex flex-col gap-1">
-                <label className="font-bold text-xs text-gray-500 uppercase">
-                  Email de contacto (Notificaciones)
-                </label>
-                <input
-                  type="email"
-                  className="border-b border-gray-300 focus:border-[#93683D] outline-none bg-transparent py-1 transition-colors"
-                  value={cardInfo.card_contact_email}
-                  onChange={(e) =>
-                    setCardInfo({
-                      ...cardInfo,
-                      card_contact_email: e.target.value,
-                    })
-                  }
-                  placeholder="email@example.com"
-                />
-              </div>
+            <div className="flex flex-col gap-1">
+              <label className="font-bold text-xs text-gray-500 uppercase">
+                Fecha de vencimiento (MM/AA)
+              </label>
+              <input
+                type="text"
+                className="border-b border-gray-300 focus:border-[#93683D] outline-none bg-transparent py-1 transition-colors"
+                value={cardInfo.card_expiry}
+                onChange={(e) =>
+                  setCardInfo({ ...cardInfo, card_expiry: e.target.value })
+                }
+                placeholder="MM/YY"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="font-bold text-xs text-gray-500 uppercase">
+                CVV
+              </label>
+              <input
+                type="text"
+                className="border-b border-gray-300 focus:border-[#93683D] outline-none bg-transparent py-1 transition-colors"
+                value={cardInfo.card_cvv}
+                onChange={(e) =>
+                  setCardInfo({ ...cardInfo, card_cvv: e.target.value })
+                }
+                placeholder="123"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="font-bold text-xs text-gray-500 uppercase">
+                ZIP Code
+              </label>
+              <input
+                type="text"
+                className="border-b border-gray-300 focus:border-[#93683D] outline-none bg-transparent py-1 transition-colors"
+                value={cardInfo.card_zip}
+                onChange={(e) =>
+                  setCardInfo({ ...cardInfo, card_zip: e.target.value })
+                }
+                placeholder="00000"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="font-bold text-xs text-gray-500 uppercase">
+                Email de contacto (Notificaciones)
+              </label>
+              <input
+                type="email"
+                className="border-b border-gray-300 focus:border-[#93683D] outline-none bg-transparent py-1 transition-colors"
+                value={cardInfo.card_contact_email}
+                onChange={(e) =>
+                  setCardInfo({
+                    ...cardInfo,
+                    card_contact_email: e.target.value,
+                  })
+                }
+                placeholder="email@example.com"
+              />
             </div>
           </div>
         </div>
 
-        {/* Dynamic Signature Block */}
+        {/* ── SIGNATURE BLOCK (always shown) ── */}
         <section className="pt-10 mt-16 border-t-2 border-gray-200 border-double">
           <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
             <div className="space-y-8">
@@ -486,7 +503,7 @@ export default function ContractPage() {
           </button>
         </div>
         <footer className="mt-16 text-center text-xs text-gray-400 font-sans uppercase tracking-[0.2em] pt-8 border-t">
-          Motoclick Confidential & Proprietary - 2026
+          Motoclick Confidential &amp; Proprietary - 2026
         </footer>
       </div>
     </div>

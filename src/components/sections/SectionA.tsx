@@ -72,7 +72,7 @@ export function SectionA() {
           render={({ field: { value, onChange, ...fieldProps } }) => (
             <FormItem>
               <FormLabel>
-                BUSINESS LOGO <span className="text-red-500">*</span>
+                BUSINESS LOGO <span className="text-zinc-400 text-xs font-normal">(optional)</span>
               </FormLabel>
               <FormControl>
                 <div className="space-y-2">
@@ -82,6 +82,13 @@ export function SectionA() {
                     onChange={(e) => {
                       const file = e.target.files?.[0];
                       if (file) {
+                        const MAX_SIZE = 2 * 1024 * 1024; // 2 MB
+                        if (file.size > MAX_SIZE) {
+                          e.target.value = "";
+                          onChange(undefined);
+                          alert(`Image is too large (${(file.size / 1024 / 1024).toFixed(1)} MB). Maximum size is 2 MB.`);
+                          return;
+                        }
                         const reader = new FileReader();
                         reader.onloadend = () => {
                           onChange({
@@ -94,10 +101,15 @@ export function SectionA() {
                     }}
                     {...fieldProps}
                   />
+                  <p className="text-[11px] text-zinc-400">Max 2 MB · PNG, JPG, WEBP</p>
                   {value?.preview && (
                     <div className="mt-2 text-center p-2 border rounded-md bg-zinc-50">
                       <p className="text-[10px] text-zinc-500 uppercase font-bold mb-2">Logo Preview</p>
-                      <img src={value.preview} alt="Logo Preview" className="h-16 mx-auto object-contain border bg-white" />
+                      <img
+                        src={value.preview}
+                        alt="Logo Preview"
+                        className="h-36 w-full max-w-sm mx-auto object-contain border bg-white rounded-md p-2"
+                      />
                     </div>
                   )}
                 </div>

@@ -83,12 +83,12 @@ export const template = (data: MotoclickClientOnboardingForm) => {
                 <div style="${fieldHalfStyle}"><span style="${labelStyle}">Avg Orders / Day / Branch</span><span style="${valueStyle}">${formatValue(data.avg_orders_per_location)}</span></div>
                 ${data.number_of_locations > 1 ? `<div style="${fieldFullStyle}"><span style="${labelStyle}">Branch Addresses</span><span style="${valueStyle}">${data.location_addresses?.map((l: any) => `• ${l.address} <br>&nbsp;&nbsp;<span style="font-size: 13px; color: #666;">${l.hours?.map((h: any) => `${h.days?.join("/")}: ${h.open}-${h.close}`).join(" | ")}</span>`).join("<br>")}</span></div>` : ""}
                 
-                <div style="${fieldFullStyle}">
+                ${data.business_logo?.preview ? `<div style="${fieldFullStyle}">
                     <span style="${labelStyle}">Business Logo</span>
                     <div style="margin-top: 10px; border: 1px solid #eee; padding: 10px; background: #fafafa; display: inline-block; border-radius: 4px;">
-                        <img src="${data.business_logo?.preview}" style="max-height: 80px; max-width: 200px; object-fit: contain; display: block;" />
+                        <img src="${data.business_logo.preview}" style="max-height: 80px; max-width: 200px; object-fit: contain; display: block;" />
                     </div>
-                </div>
+                </div>` : ""}
             </div>
 
             <!-- Operating Hours Table -->
