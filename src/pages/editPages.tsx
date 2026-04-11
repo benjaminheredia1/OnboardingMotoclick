@@ -351,17 +351,17 @@ export default function EditPage() {
   if (error && !merchantData) {
     return (
       <div className="flex items-center justify-center w-full min-h-screen bg-gray-50">
-        <div className="bg-white p-10 rounded-2xl shadow-xl border text-center max-w-md mx-4">
-          <div className="w-16 h-16 bg-red-100 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">✕</div>
-          <h2 className="text-xl font-bold mb-2">Error</h2>
-          <p className="text-gray-500 text-sm">{error}</p>
+        <div className="max-w-md p-10 mx-4 text-center bg-white border shadow-xl rounded-2xl">
+          <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 text-3xl text-red-500 bg-red-100 rounded-full">✕</div>
+          <h2 className="mb-2 text-xl font-bold">Error</h2>
+          <p className="text-sm text-gray-500">{error}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-200/60 flex flex-col">
+    <div className="flex flex-col min-h-screen bg-gray-200/60">
 
       {/* ── Sticky Toolbar ── */}
       <div className="sticky top-0 z-30 bg-white border-b border-gray-200 shadow-sm">
@@ -377,7 +377,7 @@ export default function EditPage() {
               </svg>
             </div>
             <div>
-              <p className="text-sm font-semibold text-gray-800 leading-none">
+              <p className="text-sm font-semibold leading-none text-gray-800">
                 {merchantData?.merchant_name || merchantData?.legal_name || "Contract Document"}
               </p>
               <p className="text-[11px] text-gray-400 mt-0.5">ID #{id} · Motoclick Contract Edit</p>
@@ -385,7 +385,7 @@ export default function EditPage() {
           </div>
           <div className="flex items-center gap-3">
             {saved && (
-              <span className="text-xs text-green-600 font-medium flex items-center gap-1">
+              <span className="flex items-center gap-1 text-xs font-medium text-green-600">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
@@ -393,14 +393,14 @@ export default function EditPage() {
               </span>
             )}
             {error && <span className="text-xs text-red-500">{error}</span>}
-            <span className="text-xs text-gray-400 hidden md:block">Ctrl+S</span>
+            <span className="hidden text-xs text-gray-400 md:block">Ctrl+S</span>
             <button
               onClick={handleSave}
               disabled={isSaving}
               className="flex items-center gap-1.5 bg-[#93683D] hover:bg-[#7a5633] disabled:opacity-60 text-white text-xs font-bold px-4 py-2 rounded-md shadow transition-all"
             >
               {isSaving ? (
-                <><svg className="animate-spin h-3 w-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/></svg> Guardando...</>
+                <><svg className="w-3 h-3 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/></svg> Guardando...</>
               ) : (
                 <><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Guardar</>
               )}
@@ -423,28 +423,28 @@ export default function EditPage() {
             <option value="2">Heading 2</option>
             <option value="3">Heading 3</option>
           </select>
-          <div className="w-px h-5 bg-gray-200 mx-1" />
+          <div className="w-px h-5 mx-1 bg-gray-200" />
           <ToolBtn title="Bold" onClick={() => editor?.chain().focus().toggleBold().run()} active={editor?.isActive("bold")}><strong>B</strong></ToolBtn>
           <ToolBtn title="Italic" onClick={() => editor?.chain().focus().toggleItalic().run()} active={editor?.isActive("italic")}><em>I</em></ToolBtn>
           <ToolBtn title="Underline" onClick={() => editor?.chain().focus().toggleUnderline().run()} active={editor?.isActive("underline")}><span className="underline">U</span></ToolBtn>
           <ToolBtn title="Strikethrough" onClick={() => editor?.chain().focus().toggleStrike().run()} active={editor?.isActive("strike")}><span className="line-through">S</span></ToolBtn>
           <ToolBtn title="Highlight" onClick={() => editor?.chain().focus().toggleHighlight().run()} active={editor?.isActive("highlight")}><span className="bg-yellow-200 px-0.5 rounded">H</span></ToolBtn>
-          <div className="w-px h-5 bg-gray-200 mx-1" />
+          <div className="w-px h-5 mx-1 bg-gray-200" />
           <ToolBtn title="Bullet List" onClick={() => editor?.chain().focus().toggleBulletList().run()} active={editor?.isActive("bulletList")}>☰</ToolBtn>
           <ToolBtn title="Ordered List" onClick={() => editor?.chain().focus().toggleOrderedList().run()} active={editor?.isActive("orderedList")}>1.</ToolBtn>
           <ToolBtn title="Blockquote" onClick={() => editor?.chain().focus().toggleBlockquote().run()} active={editor?.isActive("blockquote")}>"</ToolBtn>
-          <div className="w-px h-5 bg-gray-200 mx-1" />
+          <div className="w-px h-5 mx-1 bg-gray-200" />
           <ToolBtn title="Align Left" onClick={() => editor?.chain().focus().setTextAlign("left").run()} active={editor?.isActive({ textAlign: "left" })}>←</ToolBtn>
           <ToolBtn title="Align Center" onClick={() => editor?.chain().focus().setTextAlign("center").run()} active={editor?.isActive({ textAlign: "center" })}>↔</ToolBtn>
           <ToolBtn title="Align Right" onClick={() => editor?.chain().focus().setTextAlign("right").run()} active={editor?.isActive({ textAlign: "right" })}>→</ToolBtn>
-          <div className="w-px h-5 bg-gray-200 mx-1" />
+          <div className="w-px h-5 mx-1 bg-gray-200" />
           <ToolBtn title="Divider" onClick={() => editor?.chain().focus().setHorizontalRule().run()}>—</ToolBtn>
           <ToolBtn title="Undo" onClick={() => editor?.chain().focus().undo().run()}>↩</ToolBtn>
           <ToolBtn title="Redo" onClick={() => editor?.chain().focus().redo().run()}>↪</ToolBtn>
-          <div className="w-px h-5 bg-gray-200 mx-1" />
+          <div className="w-px h-5 mx-1 bg-gray-200" />
           <button
             onMouseDown={(e) => { e.preventDefault(); editor?.commands.clearContent(); }}
-            className="px-2 py-1 rounded text-xs font-medium text-red-400 hover:bg-red-50 hover:text-red-600 transition-colors"
+            className="px-2 py-1 text-xs font-medium text-red-400 transition-colors rounded hover:bg-red-50 hover:text-red-600"
           >
             Clear All
           </button>
@@ -452,12 +452,12 @@ export default function EditPage() {
       </div>
 
       {/* ── Document / Paper ── */}
-      <div className="flex-1 flex justify-center py-10 px-4">
+      <div className="flex justify-center flex-1 px-4 py-10">
         <div
           className="bg-white w-full max-w-4xl shadow-2xl rounded-sm border-t-8 border-[#93683D]"
           style={{ minHeight: "29.7cm" }}
         >
-          <div className="px-14 py-12">
+          <div className="py-12 px-14">
             <style>{`
               .contract-editor { font-family: 'Helvetica', 'Arial', sans-serif; font-size: 10px; line-height: 1.65; color: #222; }
               .contract-editor:focus { outline: none; }
@@ -482,7 +482,7 @@ export default function EditPage() {
         </div>
       </div>
 
-      <div className="text-center py-4 text-xs text-gray-400 uppercase tracking-widest">
+      <div className="py-4 text-xs tracking-widest text-center text-gray-400 uppercase">
         Motoclick Confidential &amp; Proprietary — {new Date().getFullYear()}
       </div>
     </div>
