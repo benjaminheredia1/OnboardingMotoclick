@@ -7,7 +7,6 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Highlight from "@tiptap/extension-highlight";
-import { process } from "zod/v4/core";
 
 const N8N_URL = import.meta.env.VITE_N8N_URL;
 

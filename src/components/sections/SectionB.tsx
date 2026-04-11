@@ -75,8 +75,7 @@ export function SectionB() {
                   selectedValues.filter((v) => v !== opt).join(", "),
                 );
               } else {
-                field.onChange([...selectedValues, opt].join(", "));s
-              }
+                field.onChange([...selectedValues, opt].join(", "));              }
             };
 
             return (
