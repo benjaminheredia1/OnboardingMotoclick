@@ -23,7 +23,7 @@ export function SectionA() {
 
   useEffect(() => {
     const currentCount = fields.length;
-    const targetCount = numLocations > 1 ? numLocations : 0;
+    const targetCount = numLocations > 1 ? numLocations - 1 : 0;
 
     if (targetCount > currentCount) {
       for (let i = currentCount; i < targetCount; i++) {
@@ -41,11 +41,11 @@ export function SectionA() {
 
   return (
     <div className="">
-      <div className="bg-orange-600 text-white px-4 py-2 uppercase font-semibold text-sm rounded-t-md">
+      <div className="px-4 py-2 text-sm font-semibold text-white uppercase bg-orange-600 rounded-t-md">
         A. Business Information
       </div>
 
-      <div className="p-4 bg-white border border-t-0 rounded-b-md shadow-sm space-y-4">
+      <div className="p-4 space-y-4 bg-white border border-t-0 shadow-sm rounded-b-md">
         <FormField
           control={control}
           name="legal_name"
@@ -72,7 +72,7 @@ export function SectionA() {
           render={({ field: { value, onChange, ...fieldProps } }) => (
             <FormItem>
               <FormLabel>
-                BUSINESS LOGO <span className="text-zinc-400 text-xs font-normal">(optional)</span>
+                BUSINESS LOGO <span className="text-xs font-normal text-zinc-400">(optional)</span>
               </FormLabel>
               <FormControl>
                 <div className="space-y-2">
@@ -103,12 +103,12 @@ export function SectionA() {
                   />
                   <p className="text-[11px] text-zinc-400">Max 2 MB · PNG, JPG, WEBP</p>
                   {value?.preview && (
-                    <div className="mt-2 text-center p-2 border rounded-md bg-zinc-50">
+                    <div className="p-2 mt-2 text-center border rounded-md bg-zinc-50">
                       <p className="text-[10px] text-zinc-500 uppercase font-bold mb-2">Logo Preview</p>
                       <img
                         src={value.preview}
                         alt="Logo Preview"
-                        className="h-36 w-full max-w-sm mx-auto object-contain border bg-white rounded-md p-2"
+                        className="object-contain w-full max-w-sm p-2 mx-auto bg-white border rounded-md h-36"
                       />
                     </div>
                   )}
@@ -205,7 +205,7 @@ export function SectionA() {
                 </FormLabel>
                 <FormControl>
                   <select
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-2 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="flex w-full h-10 px-2 py-2 text-sm border rounded-md border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     value={field.value}
                     onChange={field.onChange}
                   >
@@ -382,23 +382,32 @@ export function SectionA() {
             </FormItem>
           )}
         />
-
+        {/* Cuando solo es una ubicacion*/}
+        
+        {numLocations >= 1 && (
+          <div className="pt-2">
+            <label className="block mb-2 text-xs font-bold uppercase text-zinc-500">
+              OPERATING HOURS
+            </label>
+            <OperatingHours />
+          </div>
+        )}
         {numLocations > 1 && fields.map((fieldArray, index) => (
-          <div key={fieldArray.id} className="p-4 bg-zinc-50/50 border border-dashed rounded-lg space-y-4">
+          <div key={fieldArray.id} className="p-4 space-y-4 border border-dashed rounded-lg bg-zinc-50/50">
             <FormField
               control={control}
               name={`location_addresses.${index}.address`}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    ADDRESS OF BRANCH #{index + 1} <span className="text-red-500">*</span>
+                    ADDRESS OF BRANCH #{index + 2} <span className="text-red-500">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder={`e.g. 123 Main St, Branch ${index + 1}`}
+                      placeholder={`e.g. 123 Main St, Branch ${index + 2}`}
                       maxLength={200}
                       {...field}
-                    />
+                    /> 
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -406,8 +415,8 @@ export function SectionA() {
             />
             
             <div className="pt-2">
-              <label className="text-xs font-bold text-zinc-500 uppercase mb-2 block">
-                Operating Hours for Branch #{index + 1}
+              <label className="block mb-2 text-xs font-bold uppercase text-zinc-500">
+                Operating Hours for Branch #{index + 2}
               </label>
               <OperatingHours namePrefix={`location_addresses.${index}`} />
             </div>
@@ -418,7 +427,7 @@ export function SectionA() {
           control={control}
           name="business_type"
           render={({ field }) => (
-            <FormItem className="space-y-3 pt-4">
+            <FormItem className="pt-4 space-y-3">
               <FormLabel>
                 BUSINESS TYPE <span className="text-red-500">*</span>
               </FormLabel>
@@ -438,12 +447,12 @@ export function SectionA() {
                   ].map((type) => (
                     <FormItem
                       key={type}
-                      className="flex items-center space-x-3 space-y-0 p-3 bg-zinc-50 border rounded-md cursor-pointer"
+                      className="flex items-center p-3 space-x-3 space-y-0 border rounded-md cursor-pointer bg-zinc-50"
                     >
                       <FormControl>
                         <RadioGroupItem value={type} />
                       </FormControl>
-                      <FormLabel className="font-normal cursor-pointer flex-1">
+                      <FormLabel className="flex-1 font-normal cursor-pointer">
                         {type}
                       </FormLabel>
                     </FormItem>
@@ -474,13 +483,6 @@ export function SectionA() {
             </FormItem>
           )}
         />
-
-        <div className="pt-6">
-          <label className="text-sm font-medium leading-none mb-4 block">
-            OPERATING HOURS
-          </label>
-          <OperatingHours />
-        </div>
       </div>
     </div>
   );

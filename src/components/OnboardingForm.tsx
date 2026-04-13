@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { onboardingSchema } from "@/lib/schema";
 
 import { submitRegistration } from "@/lib/submit";
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
 
 import { SectionA } from "./sections/SectionA";
 import { SectionB } from "./sections/SectionB";
@@ -133,6 +135,21 @@ export function OnboardingForm() {
     }, 5000);
   };
 
+  const startTutorial = () => {
+    const driverObj = driver({
+      showProgress: true,
+      animate: true,
+      steps: [
+        { element: '.ios-navbar', popover: { title: 'Welcome', description: 'This is the Motoclick onboarding form. Let us show you around.', side: "bottom", align: 'start' }},
+        { element: 'input[name="legal_name"]', popover: { title: 'Legal Name', description: 'Enter the exact legal name of your business as registered.', side: "bottom", align: 'start' }},
+        { element: 'input[name="number_of_locations"]', popover: { title: 'Multiple Locations', description: 'If you have more than one branch, enter the number here to add hours and addresses for each.', side: "top", align: 'start' }},
+        { popover: { title: 'Other Sections', description: 'Fill out operational details, tech platforms, and agreements as you scroll down.'}},
+        { element: '.form-footer button[type="submit"]', popover: { title: 'Submit', description: 'After reviewing everything, click here to submit your application!', side: "top", align: 'start' }}
+      ]
+    });
+    driverObj.drive();
+  };
+
   if (isSuccess) {
     return (
       <div className="flex flex-col items-center justify-center max-w-3xl min-h-screen p-4 mx-auto ios-app md:p-8 bg-zinc-50">
@@ -172,10 +189,13 @@ export function OnboardingForm() {
           alt="Motoclick Logo Banner"
           className="w-full h-auto object-cover bg-[#93683D]/10"
         />
-        <div className="w-full py-3 text-center">
+        <div className="w-full py-3 text-center flex flex-col items-center gap-2">
           <p className="text-sm font-medium text-gray-600">
             Complete this form to activate your account
           </p>
+          <Button type="button" onClick={startTutorial} variant="default" size="sm" className="bg-[#93683D] hover:bg-[#7a5530] text-white rounded-full px-6 shadow border border-[#93683D]/20">
+            Tutorial
+          </Button>
         </div>
       </header>
 

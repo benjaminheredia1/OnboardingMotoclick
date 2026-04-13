@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-const cleanTextRegex = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ.,&\-\/\(\)]*$/;
+const cleanTextRegex = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ.,&\-\/\(\)+:]*$/;
 const cleanTextMsg =
-  "No special characters allowed (only letters, numbers, spaces, and basic punctuation like . , & - / ( ))";
+  "No special characters allowed (only letters, numbers, spaces, and basic punctuation like . , & - / ( ) + :)";
 
 export const operatingHoursSlotSchema = z.object({
   id: z.number(),

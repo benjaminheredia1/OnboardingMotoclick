@@ -27,7 +27,7 @@ export const template = (data: MotoclickClientOnboardingForm) => {
   const mutedOrange = "#93683D";
   const h2Style = `font-size: 17px; font-weight: 700; margin-top: 25px; margin-bottom: 12px; color: white; background-color: ${mutedOrange}; padding: 10px 15px; text-transform: uppercase; break-after: avoid; page-break-after: avoid;`;
   const sectionWrapperStyle =
-    "margin-bottom: 30px; break-inside: avoid; page-break-inside: avoid; width: 100%;";
+    "margin-bottom: 30px; width: 100%;";
   const containerStyle =
     "display: flex; flex-wrap: wrap; justify-content: space-between;";
   const fieldHalfStyle =
@@ -59,8 +59,8 @@ export const template = (data: MotoclickClientOnboardingForm) => {
   return `
     <div style="font-family: 'Helvetica', 'Arial', sans-serif; font-size: 15px; line-height: 1.6; color: #222; background: white; padding: 30px; box-sizing: border-box; width: 100%; font-weight: 500;">
         
-        <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 16px; width: 100%;">
-            <img src="${logoHeader}" alt="Header Logo" style="max-width: 100%; max-height: 120px; height: auto; display: block; margin: 0 auto; object-fit: contain;">
+        <div style="text-align: center; margin-bottom: 16px; width: 100%;">
+            <img src="${logoHeader}" alt="Header Logo" style="height: 100px; width: auto; display: inline-block; margin: 0 auto; object-fit: contain;">
         </div>
 
         <h1 style="text-align: center; color: ${mutedOrange}; margin-top: 0; font-size: 26px; font-weight: 800;">Motoclick Onboarding Form</h1>
@@ -93,7 +93,7 @@ export const template = (data: MotoclickClientOnboardingForm) => {
 
             <!-- Operating Hours Table -->
             <div style="margin-bottom: 20px;">
-                <span style="${labelStyle}">Operating Hours</span>
+                <span style="${labelStyle}">${data.number_of_locations > 1 ? "Operating Hours (Main Location)" : "Operating Hours"}</span>
                 <table style="width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px;">
                     <thead>
                         <tr style="background-color: #f5f5f5;">
@@ -107,6 +107,26 @@ export const template = (data: MotoclickClientOnboardingForm) => {
                     </tbody>
                 </table>
             </div>
+
+            ${data.number_of_locations > 1 && data.location_addresses && data.location_addresses.length > 0 ? 
+              data.location_addresses.map((loc: any, idx: number) => `
+                <div style="margin-bottom: 20px;">
+                    <span style="${labelStyle}">Operating Hours (Branch #${idx + 2}: ${formatValue(loc.address)})</span>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px;">
+                        <thead>
+                            <tr style="background-color: #f5f5f5;">
+                                <th style="padding: 6px 8px; border: 1px solid #ddd; text-align: left;">Days</th>
+                                <th style="padding: 6px 8px; border: 1px solid #ddd; text-align: left;">Open</th>
+                                <th style="padding: 6px 8px; border: 1px solid #ddd; text-align: left;">Close</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${formatOperatingHours(loc.hours)}
+                        </tbody>
+                    </table>
+                </div>
+              `).join('') : ''
+            }
         </div>
 
         <!-- SECTION B -->
