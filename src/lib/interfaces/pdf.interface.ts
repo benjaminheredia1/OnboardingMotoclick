@@ -1,7 +1,6 @@
 export interface MotoclickClientOnboardingForm {
   // Section A
   legal_name: string;
-  business_logo?: { file: File, preview: string };
   dba_name: string;
   primary_contact_name: string;
   title_role?: string;

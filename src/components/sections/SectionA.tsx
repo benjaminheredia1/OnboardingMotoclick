@@ -68,59 +68,6 @@ export function SectionA() {
 
         <FormField
           control={control}
-          name="business_logo"
-          render={({ field: { value, onChange, ...fieldProps } }) => (
-            <FormItem>
-              <FormLabel>
-                BUSINESS LOGO <span className="text-xs font-normal text-zinc-400">(optional)</span>
-              </FormLabel>
-              <FormControl>
-                <div className="space-y-2">
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (file) {
-                        const MAX_SIZE = 2 * 1024 * 1024; // 2 MB
-                        if (file.size > MAX_SIZE) {
-                          e.target.value = "";
-                          onChange(undefined);
-                          alert(`Image is too large (${(file.size / 1024 / 1024).toFixed(1)} MB). Maximum size is 2 MB.`);
-                          return;
-                        }
-                        const reader = new FileReader();
-                        reader.onloadend = () => {
-                          onChange({
-                            file: file,
-                            preview: reader.result as string
-                          });
-                        };
-                        reader.readAsDataURL(file);
-                      }
-                    }}
-                    {...fieldProps}
-                  />
-                  <p className="text-[11px] text-zinc-400">Max 2 MB · PNG, JPG, WEBP</p>
-                  {value?.preview && (
-                    <div className="p-2 mt-2 text-center border rounded-md bg-zinc-50">
-                      <p className="text-[10px] text-zinc-500 uppercase font-bold mb-2">Logo Preview</p>
-                      <img
-                        src={value.preview}
-                        alt="Logo Preview"
-                        className="object-contain w-full max-w-sm p-2 mx-auto bg-white border rounded-md h-36"
-                      />
-                    </div>
-                  )}
-                </div>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={control}
           name="dba_name"
           render={({ field }) => (
             <FormItem>

@@ -32,7 +32,6 @@ export function OnboardingForm() {
     resolver: zodResolver(onboardingSchema) as any,
     defaultValues: {
       legal_name: "",
-      business_logo: "",
       dba_name: "",
       primary_contact_name: "",
       title_role: "",

@@ -20,13 +20,6 @@ export const onboardingSchema = z.object({
     .min(1, "Legal Business Name is required")
     .max(100, "Max 100 characters")
     .regex(cleanTextRegex, cleanTextMsg),
-  business_logo: z
-    .any()
-    .optional()
-    .refine(
-      (val) => !val?.file || val.file.size <= 1 * 1024 * 1024,
-      "Image must be smaller than 2 MB",
-    ),
   dba_name: z
     .string()
     .min(1, "DBA / Trade Name is required")
